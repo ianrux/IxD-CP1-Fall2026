@@ -1,0 +1,19 @@
+header {
+    background-color: rgb(240, 194, 237);
+
+}
+
+main{
+    width: 960px;
+    margin: 0px auto;
+
+}
+
+img{
+    max-width: 100%;
+}
+
+p {
+    color: rebeccapurple;
+    font-family: "Open Sans", Arial, sans-serif;
+}
