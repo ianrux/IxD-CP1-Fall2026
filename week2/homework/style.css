@@ -1,0 +1,66 @@
+header {
+    background-color: rgb(240, 194, 237);
+
+}
+
+main{
+    width: 960px;
+    margin: 0px auto;
+
+}
+
+img{
+    max-width: 100%;
+}
+
+p {
+    color: rebeccapurple;
+    font-family: "Open Sans", Arial, sans-serif;
+}
+
+@media (min-width: 1920px){
+    p{
+        columns: 2;
+        color: black
+    }
+
+}
+
+@media (min-width: 1366px){
+    main{
+        width: 960px;
+        margin: 0px auto;
+    }
+
+    p{
+        columns: 3;
+        color: rgb(89, 139, 89)
+    }
+
+}
+
+@media (min-width: 820px){
+    main{
+        width: 960px;
+        margin: 0px auto;
+    }
+
+    p{
+        columns: 3;
+        color: rgb(201, 103, 103)
+    }
+
+}
+
+@media (min-width: 430px){
+    main{
+        width: 960px;
+        margin: 0px auto;
+    }
+
+    p{
+        columns: 3;
+        color: rgb(141, 77, 141)
+    }
+
+}
