@@ -1,68 +1,40 @@
-header {
-    background-color: rgb(240, 194, 237);
 
-}
+.pic {display:none; }
 
-main{
-    width: 960px;
-    margin: 0px auto;
-
-}
-
-img{
-    max-width: 100%;
-}
-
-p {
-    color: rebeccapurple;
-    font-family: "Open Sans", Arial, sans-serif;
-}
-
-
-@media (max-width: 430px){
-    main{
-        width: 960px;
-        margin: 0px auto;
-    }
-
-    p{
-        columns: 3;
-        color: rgb(141, 77, 141)
-    }
-
-}
-
-@media (min-width: 820px){
-    main{
-        width: 960px;
-        margin: 0px auto;
-    }
-
-    p{
-        columns: 3;
-        color: rgb(201, 103, 103)
-    }
-
-}
-
+/* Page 1: Desktop (1366px and up)*/
 @media (min-width: 1366px){
-    main{
-        width: 960px;
-        margin: 0px auto;
-    }
+    body{background: #1e1e1e; color: #eee; }
+    header::after {content: "Page 1- Desktop"; }
+    main {width: 1200px; margin: 0 auto; }
+    p {columns: 3; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    .pic-1 {display: block; }
+}
 
-    p{
-        columns: 3;
-        color: rgb(89, 139, 89)
-    }
-
+/* Page 2: Laptops (1024px to 1365px)*/
+@media (min-width: 1366px){
+    body{background: #1e1e1e; color: #eee; }
+    header::after {content: "Page 1- Desktop"; }
+    main {width: 1200px; margin: 0 auto; }
+    p {columns: 2; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    .pic-2 {display: block; }
 }
 
 
-@media (min-width: 1920px){
-    p{
-        columns: 2;
-        color: black
-    }
+/* Page 3: Tablets (601px to 1023px)*/
+@media (min-width: 1366px){
+    body{background: #1e1e1e; color: #eee; }
+    header::after {content: "Page 1- Desktop"; }
+    main {width: 1200px; margin: 0 auto; }
+    p {columns: 1; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    .pic-3 {display: block; }
+}
 
+
+/* Page 4: Phones (600px and below) */
+@media (min-width: 1366px){
+    body{background: #1e1e1e; color: #eee; }
+    header::after {content: "Page 1- Desktop"; }
+    main {width: 1200px; margin: 0 auto; }
+    p {columns: 1; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    .pic-4 {display: block; }
 }
