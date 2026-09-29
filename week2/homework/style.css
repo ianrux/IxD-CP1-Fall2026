@@ -1,6 +1,6 @@
 
 /* Begin with hiding all images. */
-.pic {display:none; }
+.pic, .story {display:none; }
 
 /* Page 1: Desktop (1366px and up)*/
 @media (min-width: 1366px){
