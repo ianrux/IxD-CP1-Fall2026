@@ -6,37 +6,37 @@
 @media (min-width: 1366px){
     body{background: #1e1e1e; color: #eee; }
     header::after {content: "Page 1 - Desktop"; }
-    main {width: 1200px; margin: 0 auto; }
+    main {width: 900px; margin: 0 auto; }
     .story {columns: 3; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
     .story-1, .pic-1 {display: block; }
 }
 
 /* Page 2: Laptops (1024px to 1365px)*/
 @media (min-width: 1024px) and (max-width: 1365px) {
-    body{background: #1e1e1e; color: #eee; }
+    body{background: #f0e6ff; color: #333; }
     header::after {content: "Page 2 - Laptop"; }
-    main {width: 1200px; margin: 0 auto; }
-    .story {columns: 2; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    main {width: 900px; margin: 0 auto; }
+    .story {columns: 2; font-size: 18px; font-family: "Open Sans", sans-serif; color: rgb(201 103 103); }
     .story-2, .pic-2 {display: block; }
 }
 
 
 /* Page 3: Tablets (601px to 1023px)*/
 @media (min-width: 601px) and (max-width: 1023px) {
-    body{background: #1e1e1e; color: #eee; }
+    body{background: #e6f2ff; color: #333; }
     header::after {content: "Page 3 - Tablet"; }
-    main {width: 1200px; margin: 0 auto; }
-    .story {columns: 1; font-size: 18px; font-family: "Courier New", monospace; color: #eee; }
+    main {width: 80%; margin: 0 auto; }
+    .story {columns: 1; font-size: 18px; font-family: "Georgia", serif; color: rgb(89 139 89); }
     .story-3, .pic-3 {display: block; }
 }
 
 
 /* Page 4: Phones (600px and below) */
 @media (max-width: 600px){
-    body{background: #1e1e1e; color: #eee; }
+    body{background: #fff8e7; color: black; }
     header {text-align: center; }
     header::after {content: "Page 4 - Phone"; }
-    main {width: 1200px; margin: 0 auto; }
-    .story {columns: 1; font-size: 16px; font-family: "Courier New", monospace; color: #eee; }
+    main {width: 90; margin: 0 auto; }
+    .story {columns: 1; font-size: 16px; font-family: "Arial", sans-serif; color: black; }
     .story-4, .pic-4 {display: block; }
 }
