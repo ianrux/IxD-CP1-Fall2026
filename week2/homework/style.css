@@ -14,7 +14,7 @@ header::after{font-size: 20px; }
     header h1 {font-family: "Bonheur Royale", cursive;}
     header h2 {font-family: "Bonheur Royale", cursive;}
     main {width: 900px; margin: 0 auto; }
-    .story {columns: 3; font-size: 20px; font-family: "Bonheur Royale", monospace; color: #eee; }
+    .story {columns: 4; font-size: 20px; font-family: "Bonheur Royale", monospace; color: #eee; }
     .story-1, .pic-1 {display: block; }
 }
 
@@ -25,7 +25,7 @@ header::after{font-size: 20px; }
     header h1 {font-family: "Style Script", cursive; color: rgb(201 103 103);}
     header h2 {font-family: "Style Script", cursive; color: rgb(201 103 103);}
     main {width: 900px; margin: 0 auto; }
-    .story {columns: 2; font-size: 18px; font-family: "Style Script", sans-serif; color: rgb(201 103 103); }
+    .story {columns: 3; font-size: 18px; font-family: "Style Script", sans-serif; color: rgb(201 103 103); }
     .story-2, .pic-2 {display: block; }
 }
 
@@ -37,7 +37,7 @@ header::after{font-size: 20px; }
     header h1 {font-family: "Lovers Quarrel", cursive; color: rgb(89 139 89) }
     header h2 {font-family: "Lovers Quarrel", cursive; color: rgb(89 139 89)}
     main {width: 80%; margin: 0 auto; }
-    .story {columns: 1; font-size: 18px; font-family: "Lovers Quarrel", serif; color: rgb(89 139 89); }
+    .story {columns: 2; font-size: 18px; font-family: "Lovers Quarrel", serif; color: rgb(89 139 89); }
     .story-3, .pic-3 {display: block; }
 }
 
