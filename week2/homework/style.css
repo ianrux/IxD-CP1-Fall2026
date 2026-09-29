@@ -36,7 +36,7 @@ header h2 {font-size: 18px; margin: 0px 0 8px;}
     header h1 {font-family: "Lovers Quarrel", cursive;}
     header h2 {font-family: "Lovers Quarrel", cursive;}
     main {width: 80%; margin: 0 auto; }
-    .story {columns: 1; font-size: 18px; font-family: "Fascinate Inline", serif; color: rgb(89 139 89); }
+    .story {columns: 1; font-size: 18px; font-family: "Lovers Quarrel", serif; color: rgb(89 139 89); }
     .story-3, .pic-3 {display: block; }
 }
 
