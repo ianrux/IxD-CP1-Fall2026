@@ -4,12 +4,13 @@
 .pic {margin: 20px auto; }
 header {text-align: center;}
 header h1 {font-size: 28px; margin: 10px 0 4px;}
-header h2 {font-size: 18px; margin: 0px 0 8px;}
+header h2 {font-size: 22px; margin: 0px 0 8px;}
+header::after{font-size: 20px; }
 
 /* Page 1: Desktop (1366px and up)*/
 @media (min-width: 1366px){
     body{background: #1e1e1e; color: #eee; }
-    header::after {content: "Page 1 - Desktop"; }
+    header::after {content: "Page 1 - Desktop"; font-family: "Bonheur Royale", cursive; color: #eee }
     header h1 {font-family: "Bonheur Royale", cursive;}
     header h2 {font-family: "Bonheur Royale", cursive;}
     main {width: 900px; margin: 0 auto; }
@@ -20,9 +21,9 @@ header h2 {font-size: 18px; margin: 0px 0 8px;}
 /* Page 2: Laptops (1024px to 1365px)*/
 @media (min-width: 1024px) and (max-width: 1365px) {
     body{background: #f0e6ff; color: #333; }
-    header::after {content: "Page 2 - Laptop"; }
-    header h1 {font-family: "Style Script", cursive;}
-    header h2 {font-family: "Style Script", cursive;}
+    header::after {content: "Page 2 - Laptop";font-family: "Style Script", cursive; color: rgb(201 103 103); }
+    header h1 {font-family: "Style Script", cursive; color: rgb(201 103 103);}
+    header h2 {font-family: "Style Script", cursive; color: rgb(201 103 103);}
     main {width: 900px; margin: 0 auto; }
     .story {columns: 2; font-size: 18px; font-family: "Style Script", sans-serif; color: rgb(201 103 103); }
     .story-2, .pic-2 {display: block; }
@@ -32,9 +33,9 @@ header h2 {font-size: 18px; margin: 0px 0 8px;}
 /* Page 3: Tablets (601px to 1023px)*/
 @media (min-width: 601px) and (max-width: 1023px) {
     body{background: #e6f2ff; color: #333; }
-    header::after {content: "Page 3 - Tablet"; }
-    header h1 {font-family: "Lovers Quarrel", cursive;}
-    header h2 {font-family: "Lovers Quarrel", cursive;}
+    header::after {content: "Page 3 - Tablet"; font-family: "Lovers Quarrel", cursive; color: rgb(89 139 89) }
+    header h1 {font-family: "Lovers Quarrel", cursive; color: rgb(89 139 89) }
+    header h2 {font-family: "Lovers Quarrel", cursive; color: rgb(89 139 89)}
     main {width: 80%; margin: 0 auto; }
     .story {columns: 1; font-size: 18px; font-family: "Lovers Quarrel", serif; color: rgb(89 139 89); }
     .story-3, .pic-3 {display: block; }
@@ -45,7 +46,7 @@ header h2 {font-size: 18px; margin: 0px 0 8px;}
 @media (max-width: 600px){
     body{background: #fff8e7; color: black; }
     header {text-align: center; }
-    header::after {content: "Page 4 - Phone"; }
+    header::after {content: "Page 4 - Phone"; font-family: "Just Another Hand", cursive; color: black; }
     header h1 {font-family: "Just Another Hand", cursive;}
     header h2 {font-family: "Just Another Hand", cursive;}
     main {width: 90%; margin: 0 auto; }
