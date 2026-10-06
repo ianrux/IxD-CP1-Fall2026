@@ -17,7 +17,7 @@ const rounds = [
         images: [
             "https://t4.ftcdn.net/jpg/05/97/75/29/360_F_597752965_kt6hxPlxgSHcFL5I0h0bMzRHIjjsUOb9.jpg",
             "https://graphdes.com/wp-content/uploads/2012/02/tumblr_lyuhqb3e9n1ro09hco1_500.jpg?w=595",
-            "https://i.pinimg.com/originals/68/1c/6f/681c6fe99d869c29caf0c75d91941e75.jpg?nii=t"
+            "https://wildlifeartstore.b-cdn.net/wp-content/uploads/2023/10/Backflip.-Baby-Panda.-A-pencil-drawing-by-Kevin-Hayler-43.jpg"
         ]
     },
     {
@@ -47,8 +47,8 @@ const wrongSentences = [
 let currentRound = 0;
 
 function loadRound() {
-    const container = document.getElementById("imageContainer");
-    const message = document.getElementById("message");
+    const container = document.getElementById("imageContainer"); //Finds element with this ID, so necessary top image container
+    const message = document.getElementById("message"); //Finds element with this ID, so necessary wrong message
     message.textContent = "";
     container.innerHTML = "";
 
@@ -67,7 +67,7 @@ function loadRound() {
         img.src = src;
         img.alt = "Image " + (index + 1);
         img.onclick = function () { checkAnswer(index, src); };
-        container.appendChild(img);
+        container.appendChild(img); //Puts selected image in LargeImage
     });
 }
 
@@ -83,7 +83,7 @@ const CORRECT_DELAY = 2000;
 let locked = false;
 
 // Remembers which wrong-answer reply was shown last
-let lastWrongIndex = -1; //-1 because
+let lastWrongIndex = -1; //-1 because this is not a real response, the array starts at 0
 
 function checkAnswer(clickedIndex, imageSrc) {
     if (locked) return;
@@ -104,7 +104,7 @@ function checkAnswer(clickedIndex, imageSrc) {
 
         // Wait, then go to the next set of 3 images
         setTimeout(function () {
-            currentRound++; // ++ means
+            currentRound++; // ++ means add 1 to this variable, which moves to next round
             locked = false;
             loadRound();
         }, CORRECT_DELAY);
@@ -130,7 +130,7 @@ function checkAnswer(clickedIndex, imageSrc) {
     //Play correct sound
     if (index === rounds[currentRound].correct) {
         bellSound1.play();
-        currentRound++;
+        currentRound++; // ++ means add 1 to this variable, which moves to next round
         loadRound()
     }
 
@@ -141,4 +141,4 @@ function checkAnswer(clickedIndex, imageSrc) {
     }
 }
 
-loadRound();
+loadRound(); // Clears old images and messages allowing for updated new content

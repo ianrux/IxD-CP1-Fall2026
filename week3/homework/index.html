@@ -3,38 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework 3: Choose the Egg!</title>
+    <title>Homework 3: Choose the Chicken</title>
 
-    <style>     </style>
-
+        <link rel="stylesheet" href="style.css">
+        
 </head>
+
 <body>
-    
-    <!-- 3 Images at the top -->
-    <div class="top-images">
-        <img src="https://placeholder.com" alt="Image 1" onclick="showImage('https://placeholder.com')">
-        <img src="https://placeholder.com" alt="Image 2" onclick="showImage('https://placeholder.com')">
-        <img src="https://placeholder.com" alt="Image 3" onclick="showImage('https://placeholder.com')">
-    </div>
 
-    <!-- Area where the clicked image appears below -->
+    <h1>Choose the Chicken</h1>
+    <h2 id="roundLabel"></h2>
+
+    <!-- Currnt 3 Images Dispalyed -->
+    <div class="top-images" id="imageContainer"></div>
+
+    <!-- Large Image Box-->
     <div class="display-area">
-        <img id="largeImage" src="" alt="Click an image above to show it here">
+        <img id="largeImage" src="https://images.emojiterra.com/google/noto-emoji/unicode-16.0/bw/512px/2753.png" alt="Question mark placeholder. Click an image above to show it here">
     </div>
 
-    <script>
-        function showImage(imageSrc) {
-            const displayElement = document.getElementById('largeImage');
-            displayElement.src = imageSrc;
-        }
-    </script>
+    <!-- Wrong Response -->
+    <p id="message"></p>
 
-    <p>10 random sentences that appear at the bootm if you clock wrong? and maybe make them start over? How to get between pages</p>
-
-    <!-- Make it work on mobile too? so onpress? -->
-
-    <p>New page after selecting the first one? Timed bfore it restarts or shows 'you know your eggs!' image</p>
-
+    <script src="script.js"></script>
 
 </body>
+
 </html>
