@@ -1,0 +1,21 @@
+ .top-images {
+            display: flex;
+            gap: 15px;
+            cursor: pointer;
+        }
+        .top-images img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+        .top-images img:hover {
+            border-color: #007BFF;
+        }
+        .display-area {
+            margin-top: 20px;
+        }
+        .display-area img {
+            max-width: 450px;
+            height: auto;
+        }
