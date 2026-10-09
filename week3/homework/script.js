@@ -108,7 +108,7 @@ function checkAnswer(clickedIndex, imageSrc) {
         bellSound1.play();
         document.getElementById("message").textContent = "✅ Correct! Next round coming up...";
 
-        // Wait, then go to the next set of 3 images
+        // Wait, then go to the next set of 4 images
         setTimeout(function () {
             currentRound++; // ++ means add 1 to this variable, which moves to next round
             locked = false;
