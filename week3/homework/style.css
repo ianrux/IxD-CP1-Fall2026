@@ -33,6 +33,11 @@
     min-height: 1.5em;
     margin-top: 20px;
 }
+
+h3 {
+  color: #e93c07;
+
+}
      
 .display-area {
             width: 320px;

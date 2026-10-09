@@ -9,7 +9,8 @@ const rounds = [
         images: [
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSik3FSIpyCYpb4qFO-CweieGjgadhKxEYiF54TP8LjlqiYB5KrV4tJ41E&s=10",
             "https://elements-resized.envatousercontent.com/elements-video-cover-images/files/fdf8fedc-5b7a-468a-8de0-3b83c32b0976/inline_image_preview.jpg?w=500&cf_fit=cover&q=85&format=auto&s=2d54f3f48d27ad6c4979db4c385bdbaf8f401f695834ae9e2c000dddb7d1e022",
-            "https://cdn.britannica.com/07/183407-050-C35648B5/Chicken.jpg"
+            "https://cdn.britannica.com/07/183407-050-C35648B5/Chicken.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0ZKJQSi26XxN5BG8BTlgQyz62pFOnMGqkNOiPbcijrcG_E0BWrjP2Iitd&s=10"
         ]
     },
     {
@@ -17,7 +18,8 @@ const rounds = [
         images: [
             "https://t4.ftcdn.net/jpg/05/97/75/29/360_F_597752965_kt6hxPlxgSHcFL5I0h0bMzRHIjjsUOb9.jpg",
             "https://graphdes.com/wp-content/uploads/2012/02/tumblr_lyuhqb3e9n1ro09hco1_500.jpg?w=595",
-            "https://wildlifeartstore.b-cdn.net/wp-content/uploads/2023/10/Backflip.-Baby-Panda.-A-pencil-drawing-by-Kevin-Hayler-43.jpg"
+            "https://wildlifeartstore.b-cdn.net/wp-content/uploads/2023/10/Backflip.-Baby-Panda.-A-pencil-drawing-by-Kevin-Hayler-43.jpg",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGWPrSlhQk394hv08CWbwaZq5GjvaMQ-PQTkZxYi7l6ssN5ruMKhm8g1RQ&s=10"
         ]
     },
     {
@@ -25,7 +27,8 @@ const rounds = [
         images: [
             "https://i.pinimg.com/736x/97/df/c4/97dfc4611a90c3cca3399b46b692933a.jpg",
             "https://i.etsystatic.com/42668798/r/il/3e3c2d/5341306656/il_1588xN.5341306656_ja22.jpg",
-            "https://m.media-amazon.com/images/I/81Yapp1x97L._AC_UF894,1000_QL80_.jpg"
+            "https://m.media-amazon.com/images/I/81Yapp1x97L._AC_UF894,1000_QL80_.jpg",
+            "https://mymodernmet.com/wp/wp-content/uploads/2026/02/Love-bite-6.jpg"
         ]
     }
     ];
@@ -41,7 +44,7 @@ const wrongSentences = [
 "Would your parents be proud of that pick?",
 "Hint: Chickens have a beak, feathers, and not whatever you picked",
 "I once had confidence in you.",
-"Ach komm schon, Mann, Scheiße!"
+"Ach komm schon, Mann!"
 ];
 
 let currentRound = 0;
@@ -75,6 +78,9 @@ function loadRound() {
 // Response sounds
 const bellSound1 = new Audio("correct.mp3")
 const bellSound2 = new Audio("wrong.mp3")
+
+bellSound1.volume = 0.2; // Wife thought it was too loud and i agreeed after hearing it again. Set to 20%
+bellSound2.volume = 0.2;
 
 // Time before image switch when correct (milliseconds)
 const CORRECT_DELAY = 2000;
