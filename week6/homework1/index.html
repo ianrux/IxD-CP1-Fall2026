@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reading Responses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3f5fb;
+  --surface: #ffffff;
+  --ink: #161a2b;
+  --muted: #5d6478;
+  --line: #e4e8f2;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+  --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.wrap { max-width: 62rem; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
+header { margin-bottom: 3.5rem; max-width: 40rem; }
+h1 {
+  font-weight: 800;
+  font-size: clamp(2.4rem, 7vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 1rem;
+}
+.intro { color: var(--muted); margin: 0; font-size: 1.1rem; }
+nav { margin-top: 1.5rem; display: flex; gap: 0.6rem; flex-wrap: wrap; }
+nav a {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color .15s, color .15s;
+}
+nav a:hover { border-color: var(--accent); color: var(--accent); }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+section { margin-bottom: 4.5rem; scroll-margin-top: 1.5rem; }
+.reading-head { margin-bottom: 1.5rem; max-width: 44rem; }
+h2 { font-weight: 800; font-size: clamp(1.5rem, 4vw, 2rem); letter-spacing: -0.025em; line-height: 1.2; margin: 0 0 0.4rem; }
+.byline { margin: 0 0 0.75rem; color: var(--muted); font-size: 0.95rem; }
+.byline a { font-weight: 500; }
+.summary { margin: 0; color: var(--ink); font-size: 1rem; }
+
+article {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(22,26,43,.04), 0 8px 24px rgba(22,26,43,.05);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.meta { margin: 0; padding: 1.75rem 1.5rem; background: #fafbfe; border-right: 1px solid var(--line); font-size: 0.9rem; line-height: 1.5; }
+.meta dt { font-weight: 700; color: var(--accent); margin-top: 1.1rem; font-size: 0.82rem; }
+.meta dt:first-child { margin-top: 0; }
+.meta dd { margin: 0.2rem 0 0; color: var(--ink); }
+.content { padding: 1.75rem 2rem; max-width: 44rem; }
+blockquote {
+  margin: 0 0 1.4rem;
+  padding: 1rem 1.25rem;
+  background: var(--accent-soft);
+  border-radius: 12px;
+  color: #3a3f58;
+  font-size: 0.95rem;
+  font-style: italic;
+}
+blockquote p { margin: 0; }
+.response { margin: 0; }
+
+footer { color: var(--muted); font-size: 0.9rem; }
+
+@media (max-width: 700px) {
+  .wrap { padding-top: 2.5rem; }
+  article { grid-template-columns: 1fr; }
+  .meta { border-right: 0; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem; }
+  .meta dt { margin-top: 0; }
+  .content { padding: 1.25rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Reading Responses</h1>
+  <p class="intro">Notes on what stood out from two readings about how designers build systems and test ideas.</p>
+  <nav aria-label="Readings">
+    <a href="#pds">Programming Design Systems</a>
+    <a href="#prototypes">What Do Prototypes Prototype?</a>
+  </nav>
+</header>
+
+<section id="pds">
+  <div class="reading-head">
+    <h2>Programming Design Systems</h2>
+    <p class="byline">Rune Madsen · <a href="https://programmingdesignsystems.com/introduction/">Read the online book</a></p>
+    <p class="summary">The introduction to Madsen’s book argues that graphic design can be taught as a set of rules and relationships, and that writing those rules as code lets designers build flexible systems instead of one-off layouts. It also covers foundations like figure and ground and the history of color theory.</p>
+  </div>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>What is a design system?</dd>
+      <dt>Why I chose it</dt><dd>Compelling. It explains why I'm here.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>Meta-design is much more difficult than design; it is easier to draw something than to explain how to draw it… However, once we have successfully explained how to draw something in a sufficiently general manner, the same explanation will work for related shapes, in different circumstances; so the time spent in formulating a precise explanation turns out to be worth it.</p></blockquote>
+      <p class="response">I think this understanding is why I was accepted into a design program, despite not having a formal art background like my peers. Madsen’s early idea of changing the curriculum toward programming supports this, since code can be a powerful design tool too.</p>
+    </div>
+  </article>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>Figure and Ground</dd>
+      <dt>Why I chose it</dt><dd>Future practice, and it shows that everyone can co-design.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>A good way to practice these relationships is the ‘design a word’ exercise… This helps you build one of the most fundamental skills in graphic design: The ability to create visual relationships that make sense for your content.</p></blockquote>
+      <p class="response">I’m always a fan of collaborative projects that showcase an individual’s perspective on problem solving. An earlier article we read spoke about co-design, and this exercise shows that everyone has some ability to design.</p>
+    </div>
+  </article>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>A Short History of Color Theory</dd>
+      <dt>Why I chose it</dt><dd>Perspective.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>Although Newton eventually won the argument about the nature of light, Goethe’s work is important to us because it focuses on the cognitive effect that color has on humans… including black, and this is true because pigments mix in a subtractive way: Combining paints of different colors will eventually result in black paint by subtracting waves of light.</p></blockquote>
+      <p class="response">This quote illustrates the importance of technical versus practical truths. Good design draws on a bit of every field users interact with, so physics is a must. Yet physics can’t be changed, while user perception can be shaped, and that is where we need to be most careful when designing.</p>
+    </div>
+  </article>
+</section>
+
+<section id="prototypes">
+  <div class="reading-head">
+    <h2>What Do Prototypes Prototype?</h2>
+    <p class="byline">Stephanie Houde &amp; Charles Hill · <a href="https://web.archive.org/web/20210304145346/https://hci.stanford.edu/courses/cs247/2012/readings/WhatDoPrototypesPrototype.pdf">Read the paper (PDF)</a></p>
+    <p class="summary">Houde and Hill argue that “prototype” is too vague a word and that a prototype should be defined by the question it answers. They introduce a model with three dimensions (role, look and feel, and implementation) and use real project examples to show how each one guides what to build.</p>
+  </div>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>Page 9, center left column</dd>
+      <dt>Why I chose it</dt><dd>Enlightening.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>Look and feel prototypes are built primarily to explore and demonstrate options for the concrete experience of an artifact. They simulate what it would be like to look at and interact with, without necessarily investigating the role it would play in the user’s life or how it would be made to work. Designers make such prototypes to visualize different look and feel possibilities for themselves and their design teams. They ask users to interact with them to see how the look and feel could be improved.</p></blockquote>
+      <p class="response">It’s helpful to explicitly reword concepts we understand but can’t concretely explain. This section, and the Prototype Relationship Model as a whole, helps me see what my Fall semester project is meant for and what I should focus on, especially as someone who loves to veer off into ancillary features.</p>
+    </div>
+  </article>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>Page 10, top right column</dd>
+      <dt>Why I chose it</dt><dd>A personal lightbulb moment.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>Without much ado they weighted the pizza box shown in Example 10 to the expected weight of the computer, and gave it to an architect to carry on a site visit. They watched how he carried the box, what else he carried with him, and what tasks he needed to do during the visit. They saw that the rectilinear form and weight were too awkward, given the other materials he carried with him, and this simple insight led them to consider a softer form.</p></blockquote>
+      <p class="response">I know they rejected the rectilinear pizza-box shape, but this prototype reminded me of the old first-generation laptops, which later evolved into shapes resembling schoolbooks or notebooks. It helped the team learn what to avoid, and also what technically worked and could be improved upon.</p>
+    </div>
+  </article>
+
+  <article>
+    <dl class="meta">
+      <dt>Reference</dt><dd>Page 12, bottom left column</dd>
+      <dt>Why I chose it</dt><dd>Reflective.</dd>
+    </dl>
+    <div class="content">
+      <blockquote><p>Implementation prototypes can be hard to build, and since they actually work, it is common for them to find their way directly into the final system. For these reasons it is often desirable to treat even implementation prototypes as disposable, and to migrate successful implementation designs to a new integrated prototype as the project progresses.</p></blockquote>
+      <p class="response">I tend to favor implementation prototypes for the very reason the authors give, “since they actually work,” but that can become an anchor for innovation. It comes from both an “if it ain’t broke, don’t fix it” mindset and personal attachment.</p>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <p>Hw: Reading Responses</p>
+</footer>
+
+</div>
+</body>
+</html>
