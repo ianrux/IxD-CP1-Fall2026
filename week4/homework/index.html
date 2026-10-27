@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feeling of Job Interviews</title>
+<style>
+:root {
+  --bg: #fbfaf7; --surface: #ffffff; --text: #1f1d1a; --muted: #5f5a52;
+  --rule: #e4e0d8; --accent: #b4441f; --accent-soft: #fbe9e1; --line: #9b958b;
+  --code-bg: #f1eee8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171614; --surface: #201e1b; --text: #ece8e1; --muted: #a8a197;
+    --rule: #34312c; --accent: #ef7a50; --accent-soft: #3a241b; --line: #7d776d;
+    --code-bg: #2a2723;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171614; --surface: #201e1b; --text: #ece8e1; --muted: #a8a197;
+  --rule: #34312c; --accent: #ef7a50; --accent-soft: #3a241b; --line: #7d776d;
+  --code-bg: #2a2723;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 17px/1.65 Georgia, "Iowan Old Style", "Times New Roman", serif;
+}
+main { max-width: 760px; margin: 0 auto; padding: 56px 16px 96px; }
+h1, h2, h3, .eyebrow, figcaption, table, .timeline, .meta {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: 12px; color: var(--accent); font-weight: 700; margin: 0 0 12px; }
+h1 { font-size: clamp(30px, 6vw, 44px); line-height: 1.12; margin: 0 0 12px; letter-spacing: -0.01em; }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 40px; }
+h2 { font-size: 26px; line-height: 1.25; margin: 64px 0 16px; padding-top: 24px; border-top: 1px solid var(--rule); }
+h3 { font-size: 19px; margin: 36px 0 10px; }
+p { margin: 0 0 16px; }
+ul { padding-left: 22px; margin: 0 0 20px; }
+li { margin: 0 0 8px; }
+a { color: var(--accent); text-underline-offset: 3px; }
+strong { font-weight: 700; }
+figure { margin: 24px 0 32px; }
+figure img { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--rule); background: var(--surface); }
+figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 560px) { .trio { grid-template-columns: 1fr; } }
+.ref { display: grid; grid-template-columns: 200px 1fr; gap: 20px; align-items: start; margin: 0 0 28px; }
+.ref img { width: 100%; border-radius: 8px; border: 1px solid var(--rule); display: block; }
+.ref p { margin: 0; }
+.ref .num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+@media (max-width: 560px) { .ref { grid-template-columns: 1fr; } }
+.table-wrap { overflow-x: auto; margin: 0 0 24px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; line-height: 1.5; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--rule); }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.timeline { margin: 8px 0 8px; }
+.timeline svg { width: 100%; height: auto; display: block; }
+.angle { margin-top: 32px; }
+.disclosure { margin-top: 64px; padding: 16px 20px; border-radius: 8px; background: var(--accent-soft); font-size: 15px; }
+kbd { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--code-bg); padding: 1px 6px; border-radius: 4px; }
+@media print {
+  body { background: #fff; color: #000; font-size: 12pt; }
+  main { padding: 0; max-width: none; }
+  h2 { break-after: avoid; }
+  figure, .ref { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<p class="eyebrow">Low-Poly Model Homework</p>
+<h1>Job Interviews Circus Act</h1>
+<p class="meta">Clown on a Ball: project documentation · October 13, 2026</p>
+
+<h2 id="process-timeline" style="border-top:0;margin-top:0;padding-top:0">Process Timeline</h2>
+<div class="timeline" role="img" aria-label="From idea to final render in eight stages">
+<svg viewBox="0 0 760 256" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--line)"/></marker></defs>
+  <g fill="none" style="stroke:var(--line)" stroke-width="1.25">
+    <path d="M184 60H208" marker-end="url(#arr)"/><path d="M368 60H392" marker-end="url(#arr)"/><path d="M552 60H576" marker-end="url(#arr)"/>
+    <path d="M656 96V132H104V160" marker-end="url(#arr)"/>
+    <path d="M184 196H208" marker-end="url(#arr)"/><path d="M368 196H392" marker-end="url(#arr)"/><path d="M552 196H576" marker-end="url(#arr)"/>
+  </g>
+  <g font-size="13" style="fill:var(--text)">
+    <g><rect x="24" y="24" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="36" y="48" font-weight="600" style="fill:var(--text)">1  Ideation</text><text x="36" y="68" font-size="11.5" style="fill:var(--muted)">Vertical set piece</text><text x="36" y="84" font-size="11.5" style="fill:var(--muted)">to clown on a ball</text></g>
+    <g><rect x="208" y="24" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="220" y="48" font-weight="600" style="fill:var(--text)">2  References</text><text x="220" y="68" font-size="11.5" style="fill:var(--muted)">Juggling videos,</text><text x="220" y="84" font-size="11.5" style="fill:var(--muted)">SetPose poses</text></g>
+    <g><rect x="392" y="24" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="404" y="48" font-weight="600" style="fill:var(--text)">3  Model the clown</text><text x="404" y="68" font-size="11.5" style="fill:var(--muted)">Imphenzia tutorial,</text><text x="404" y="84" font-size="11.5" style="fill:var(--muted)">cop turned clown</text></g>
+    <g><rect x="576" y="24" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="588" y="48" font-weight="600" style="fill:var(--text)">4  Rig and pose</text><text x="588" y="68" font-size="11.5" style="fill:var(--muted)">Grant Abbitt rig,</text><text x="588" y="84" font-size="11.5" style="fill:var(--muted)">nose and buttons</text></g>
+    <g><rect x="24" y="160" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="36" y="184" font-weight="600" style="fill:var(--text)">5  Build props</text><text x="36" y="204" font-size="11.5" style="fill:var(--muted)">Ico Sphere balls,</text><text x="36" y="220" font-size="11.5" style="fill:var(--muted)">circle stage</text></g>
+    <g><rect x="208" y="160" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="220" y="184" font-weight="600" style="fill:var(--text)">6  Materials</text><text x="220" y="204" font-size="11.5" style="fill:var(--muted)">Palette colors,</text><text x="220" y="220" font-size="11.5" style="fill:var(--muted)">Roughness 0.1</text></g>
+    <g><rect x="392" y="160" width="160" height="72" rx="8" style="fill:var(--surface);stroke:var(--line)" stroke-width="1.25"/><text x="404" y="184" font-weight="600" style="fill:var(--text)">7  Scene setup</text><text x="404" y="204" font-size="11.5" style="fill:var(--muted)">Two backdrops,</text><text x="404" y="220" font-size="11.5" style="fill:var(--muted)">three spotlights</text></g>
+    <g><rect x="576" y="160" width="160" height="72" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="2"/><text x="588" y="184" font-weight="600" style="fill:var(--text)">8  Final renders</text><text x="588" y="204" font-size="11.5" style="fill:var(--text)">Three angles,</text><text x="588" y="220" font-size="11.5" style="fill:var(--text)">interview reveal</text></g>
+  </g>
+</svg>
+</div>
+
+<h2 id="overview">Overview and Concept</h2>
+<p>My scene is a clown balancing on a ball at a circus, with a twist: behind the camera sits a disappointed job interview panel. It is built from three objects: the set of juggling balls, the clown, and the balance ball with its stage.</p>
+
+<h3>Why this idea</h3>
+<p>The assignment asked for three objects, but I wanted them to work together as one organized set piece. The first arrangement that came to mind was three items stacked vertically. Stacking made me think of balancing on something, and balancing led me to a clown at a carnival.</p>
+<p>I spent a few days settling on the idea before starting. My first concept had the clown holding an umbrella up in one hand, but I cut it. Most real performer examples I watched showed balance balls, not umbrellas, so I kept the scene closer to what you would usually see.</p>
+
+<h3>Concept Sketches</h3>
+<p>Before modeling, I sketched each piece by hand to plan shapes, colors, and the final layout.</p>
+<figure><img loading="lazy" src="images/sketches.jpg" alt="Hand-drawn concept sketches: umbrella, juggling, stage, striped ball, clown outfit, background, and the full scene layout"><figcaption>Concept sketches</figcaption></figure>
+<ul>
+<li><strong>Umbrella vs. juggling:</strong> I sketched the umbrella with notes on modeling it, then compared it to juggling. Juggling was much easier and made more sense for the scene.</li>
+<li><strong>Juggling hand:</strong> The hand is turned upright, as if throwing.</li>
+<li><strong>Stage:</strong> A round platform with a red base, so the shoes and shadows stand out.</li>
+<li><strong>Balance ball:</strong> A striped ball, avoiding melon-like colors. I also considered a star pattern.</li>
+<li><strong>Clown outfit:</strong> Red and black accents, gold buttons, and curled shoes, kept simple to fit the time I had.</li>
+<li><strong>Background:</strong> Inside a circus tent, using a real circus image or stripes, with lights placed to mimic stage lighting. I noted a possible mixed-media style.</li>
+<li><strong>Full scene:</strong> The clown juggles three colored balls with one knee raised, standing on the stage.</li>
+</ul>
+
+<h2 id="presentation-plan">Presentation Plan</h2>
+<p>I will present three angles of the same arranged scene rather than one photo per object. The assignment allows either option. Each angle will be chosen based on the lighting, the scene setup, and the crowd background.</p>
+
+<h2 id="object-1">Object 1: The Clown</h2>
+<p>The clown is built from a low poly character tutorial, then recolored and detailed into a clown and rigged so he can be posed.</p>
+
+<h3>Ideation</h3>
+<p>At first I planned to use a premade character from the website shown in class. After rereading the homework, which asks us to create three objects, I switched to building the character myself. I followed the tutorial the instructor shared, <em>Easy Low Poly Character Modeling in Blender 2.9x</em> by Imphenzia. The tutorial's character ends up as a police officer, so my plan was to finish the base model, then change the colors and details to turn him into a clown.</p>
+
+<h3>Techniques Learned in Blender</h3>
+<ul>
+<li><strong>Flatten a selection:</strong> <kbd>S</kbd>, then <kbd>Z</kbd>, then <kbd>0</kbd> scales the selection to zero on the Z axis, so the faces sit on one flat plane. I used this for the feet.</li>
+<li><strong>Views and select modes:</strong> Numpad 1, 2, and 3 switch to front, side, and top views. The 1, 2, and 3 keys on the main row switch between vertex, edge, and face select in Edit Mode. Using shortcuts reduced wrist and elbow strain.</li>
+<li><strong>Mirror:</strong> Model one half of the character and Blender copies it to the other side.</li>
+<li><strong>Backface culling:</strong> Hides the back side of faces. It helps check which way faces point and whether a part has real thickness. Game engines use the same idea to skip faces the camera can't see.</li>
+<li><strong>Fill a hole:</strong> Select the border edges and press <kbd>F</kbd>.</li>
+<li><strong>Inset (<kbd>I</kbd>):</strong> Creates a smaller face inside the selected one. While insetting, pressing <kbd>I</kbd> again toggles Individual (each face separately) and <kbd>B</kbd> toggles Boundary.</li>
+<li><strong>Edge Slide (<kbd>G</kbd>, <kbd>G</kbd>):</strong> Pressing G twice slides the selection along the mesh instead of moving it freely.</li>
+<li><strong>Delete completely:</strong> <kbd>X</kbd> in Object Mode removes a whole object. In Edit Mode, X &gt; Vertices removes the selection with its edges and faces, unlike Dissolve. <kbd>L</kbd> selects connected pieces, and P &gt; Selection splits a piece into its own object.</li>
+<li><strong>Pausing the mirror:</strong> In the Modifiers tab, toggle the Mirror modifier's Edit Mode or viewport icon to turn it off temporarily. Applying the modifier (after saving a backup) makes both halves separate, so later edits stay on one side.</li>
+<li><strong>Attaching the nose and buttons:</strong> The red nose, suit buttons, and sweat drops are spheres. To keep them on the clown instead of floating free, parent each one to a bone with Ctrl+P &gt; Bone, or join them to the body with Ctrl+J and assign vertex groups so they follow the rig. Pose Mode confirms they move with him.</li>
+</ul>
+
+<h3>Problems and Fixes</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Problem</th><th>Cause</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Moving one point in the UV Editor dragged others with it</td><td>Sticky Selection was on</td><td>Set Sticky Selection to Disabled</td></tr>
+<tr><td>Black outline shapes floating above the body</td><td>They selected in Object Mode but not Edit Mode, so they were a separate object or modifier output</td><td>I never confirmed exactly what they were. I undid some recent moves, then deleted the whole object</td></tr>
+</tbody></table></div>
+
+<h3>Rigging and Pose</h3>
+<p>I rigged the clown by following <em>Character Rigging in Blender, Easy Setup for Beginners</em> by Grant Abbitt. He is rigged and posed with one arm raised.</p>
+<ul><li>Rigging steps: I followed the video one step at a time. His example is also a human-shaped character, so my model matched closely and was easy to follow along with.</li></ul>
+<p>For the pose I used references from SetPose (setpose.com). The pose, shown from three angles, stands on one leg with the other knee raised, the torso leaning back, the head tilted up, and arms out with open hands.</p>
+<ul><li>How the pose relates to the clown: I studied the juggling and ball-balancing reference videos, recreated the pose I pictured for the clown in SetPose, and took screenshots. Then I used those screenshots to pose the rigged clown in Blender.</li></ul>
+<figure>
+<div class="trio">
+<img loading="lazy" src="images/setpose1.jpg" alt="SetPose mannequin, front-angle view of the pose">
+<img loading="lazy" src="images/setpose2.jpg" alt="SetPose mannequin, side view of the pose">
+<img loading="lazy" src="images/setpose3.jpg" alt="SetPose mannequin, back-angle view of the pose">
+</div>
+<figcaption>SetPose references: front, side, and back angles</figcaption>
+</figure>
+
+<h2 id="object-2">Object 2: The Juggling Balls</h2>
+<p>Each juggling ball is an Ico Sphere, colored with my palette and given its own named material.</p>
+<h3>Shininess</h3>
+<p>The balls looked washed out against the background and lighting, so I wanted them shinier and easier to see. The options in the Principled BSDF:</p>
+<ul>
+<li>Lower <strong>Roughness</strong> for a glossy surface.</li>
+<li>Raise <strong>Metallic</strong> toward 1 for a metal look.</li>
+<li>Add <strong>Coat</strong> for a clear glossy layer over the palette color.</li>
+</ul>
+<p>Metallic surfaces need something to reflect, so the world background and lights also matter. If colors still look washed out, check the light Power and the Color Management settings.</p>
+<ul><li>What worked: lowering Roughness to about 0.1 made the balls glossy enough to stand out.</li></ul>
+<h3>References</h3>
+<ul>
+<li>A person juggling indoors against a plain wall, with motion blur on the balls.</li>
+<li>A person juggling outdoors in a park, with one ball balanced on their head.</li>
+<li>A person standing on a blue exercise ball while juggling three balls.</li>
+</ul>
+<p>Screenshots of these references appear with their videos in <a href="#sources">Sources</a>.</p>
+
+<h2 id="object-3">Object 3: The Balance Ball and Stage</h2>
+<p>Object 3 combines the balance ball and the stage it sits on into one piece of the set.</p>
+<ul><li>How I built the ball: an Ico Sphere, the same base shape I used for the juggling balls, the clown's nose, and his sweat drops.</li></ul>
+<h3>References</h3>
+<ul>
+<li>Two performers in black-and-white checkered costumes standing on large balls, one checkered and one red. The performer on the right holds a red umbrella.</li>
+<li>A masked performer standing on a large red ball at an indoor event with a crowd behind.</li>
+<li>The blue exercise ball photo from the juggling references.</li>
+</ul>
+<p>Screenshots of these references appear with their videos in <a href="#sources">Sources</a>.</p>
+<h3>The Stage</h3>
+<p>I first kept the stage in reserve as a possible fourth object, then combined it with the balance ball. It is the circle platform made earlier.</p>
+<ul>
+<li><strong>Making the circle:</strong> Shift+A &gt; Mesh &gt; Circle, with Fill Type set to N-Gon for a solid disk. A low vertex count keeps the low poly look.</li>
+<li><strong>Problem:</strong> The circle did not follow the character when I moved him away from the world center.</li>
+<li><strong>Likely cause:</strong> The circle was a separate, unparented object, or the move happened in Edit Mode, or the mesh and armature were moved separately.</li>
+<li><strong>Fix:</strong> Parent it with Ctrl+P &gt; Object and move things in Object Mode. Outcome: parenting fixed it, and the circle now moves with the character.</li>
+</ul>
+
+<h2 id="scene-setup">Scene Setup</h2>
+<p>The scene uses two photo backdrops, palette-based colors on every object, and three-point stage lighting.</p>
+<h3>Background Photo</h3>
+<p>Two photo planes frame the scene: a circus crowd behind the clown, and a panel of disappointed job interviewers behind the camera.</p>
+<ul>
+<li><strong>What worked:</strong> In the 3D viewport, Add &gt; Image &gt; Mesh Plane, then choose the photo. This creates a plane with the picture already applied. It shows in Material Preview mode, not Solid mode.</li>
+<li><strong>Problem:</strong> I couldn't find the Texture option in the Add menu.</li>
+<li><strong>Cause:</strong> I was in the 3D viewport's Add menu, which only lists objects. The Texture option lives in the Shader Editor's Add menu.</li>
+<li><strong>Other fix:</strong> In the Shader Editor, Shift+A &gt; Texture &gt; Image Texture, then connect its Color output to the Principled BSDF Base Color.</li>
+</ul>
+<h3>Coloring with the Palette</h3>
+<p>In the Shading workspace, I add my palette image as an Image Texture node on each object and connect its Color output to the Principled BSDF Base Color. I do this one at a time for each ball, each platform, and each plane the platforms sit on, then adjust the colors until they look right. This builds on the earlier UV Editor work of placing faces over the palette squares.</p>
+<h3>Naming Materials</h3>
+<p>My materials still had default names (Material.001, Material.002, and so on). I am renaming each one in the Material Properties tab to say what it is, starting with the juggling balls, so they are easy to tell apart.</p>
+<h3>Transparent Plane</h3>
+<p>To make a plane transparent, lower Alpha in the Principled BSDF and set the material's blend or render method. To let light pass through, turn off the plane's shadow under Object Properties &gt; Visibility. Transmission gives a frosted-glass look instead.</p>
+<h3>Spot Lighting</h3>
+<p>I learned spot lighting from <em>How to use Blender's Light Objects</em> by Ryan King Art.</p>
+<ul>
+<li><strong>Setup:</strong> Three spotlights, one on the left, one on the right, and one centered above. All three point down at the clown, triangulated like a typical stage.</li>
+<li><strong>Color:</strong> A warm yellow.</li>
+<li><strong>Power:</strong> 5,000 W for each light.</li>
+</ul>
+
+<h2 id="final-product">Final Product</h2>
+<p>The final scene puts a circus clown in front of a job interview. I started with a clown in the middle of a circus and a crowd photo behind him. Then I thought it would be ironic if the setting also looked like a job interview. So the background behind the clown is the circus, but behind the camera is a photo of interview panelists who look disappointed.</p>
+<p>The three render angles build up to the reveal:</p>
+
+<div class="angle">
+<p><strong>Angle 1: The full set.</strong> A wide front view of the clown balancing on the striped ball, centered on the round stage with its red-and-black striped edge. The warm spotlights pool on the stage, with the circus crowd and star-trimmed ring wall behind.</p>
+<figure><img loading="lazy" src="images/final1.jpg" alt="Final render, angle 1: wide view of the clown on the ball, centered on the striped stage in front of the circus crowd"><figcaption>Angle 1: the full set</figcaption></figure>
+</div>
+<div class="angle">
+<p><strong>Angle 2: Close up on the act.</strong> A tall side view of the clown juggling the green, purple, and yellow balls with one knee raised. It shows the details: his red nose, the sweat drop above his head, and the faceted low poly ball.</p>
+<figure><img loading="lazy" src="images/final2.jpg" alt="Final render, angle 2: close side view of the clown juggling three balls on the low poly ball" style="max-width:480px;margin:0 auto"><figcaption style="text-align:center">Angle 2: close up on the act</figcaption></figure>
+</div>
+<div class="angle">
+<p><strong>Angle 3: The reveal.</strong> The camera sits behind the clown, looking out at the panel of disappointed interviewers around a conference table. This is the joke: the circus act is really a job interview. The idea came to me while brainstorming. Watching the clown struggle to keep his balance felt like how I feel on the job market right now.</p>
+<figure><img loading="lazy" src="images/final3.jpg" alt="Final render, angle 3: view from behind the clown toward a panel of disappointed job interviewers"><figcaption>Angle 3: the reveal</figcaption></figure>
+</div>
+
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=eBOcbYHexAM">Easy Low Poly Character Modeling in Blender 2.9x</a>, Imphenzia (shared by the instructor)</li>
+<li><a href="https://www.youtube.com/watch?v=2nlMZx0vp6E">Character Rigging in Blender, Easy Setup for Beginners</a>, Grant Abbitt</li>
+<li><a href="https://www.youtube.com/watch?v=JJV8l6MaXxA">How to use Blender's Light Objects</a>, Ryan King Art</li>
+<li><a href="https://setpose.com">SetPose</a>, pose references</li>
+</ul>
+<h3>Reference Videos</h3>
+<p>Juggling and ball-balancing videos I used to plan the clown's pose.</p>
+<div class="ref"><img loading="lazy" src="images/juggle1.jpg" alt="A juggler indoors against a plain wall, with motion blur on the balls"><p><span class="num">01</span><br><a href="https://www.youtube.com/watch?v=p4_IUMS4yc8">How to Juggle 3 Balls in Two Minutes</a>, Juggleboy</p></div>
+<div class="ref"><img loading="lazy" src="images/juggle2.jpg" alt="A juggler outdoors in a park with one ball balanced on his head"><p><span class="num">02</span><br><a href="https://www.youtube.com/watch?v=vaXG365Eo_s">How to Juggle 3 Balls</a>, Flyjuggler</p></div>
+<div class="ref"><img loading="lazy" src="images/balance2.jpg" alt="A juggler standing on a blue exercise ball, juggling three balls indoors"><p><span class="num">03</span><br><a href="https://www.youtube.com/shorts/tSiVzVK9ZDs">Juggling 423 on a Walking Globe</a>, Theunicycleguytamu</p></div>
+<div class="ref"><img loading="lazy" src="images/balance1.jpg" alt="Two performers in checkered costumes balancing on large balls, one holding a red umbrella"><p><span class="num">04</span><br><a href="https://www.youtube.com/shorts/14r-U3TCWtA">Giant Circus Ball Balance Act</a>, valeartis</p></div>
+<div class="ref"><img loading="lazy" src="images/balance3.jpg" alt="A masked performer standing on a large red ball in front of a crowd"><p><span class="num">05</span><br><a href="https://www.youtube.com/shorts/fa0gZTYir5s">Globe Walking Juggler</a>, circusinmotion</p></div>
+
+<p class="disclosure"><strong>AI disclosure:</strong> I used Claude, an AI assistant, to keep running notes while I worked, answer Blender troubleshooting questions, and organize and format this documentation; the idea, sketches, models, and renders are my own.</p>
+
+</main>
+</body>
+</html>
