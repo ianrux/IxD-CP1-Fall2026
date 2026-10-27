@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ioniq 5 Interior: Blender Build Log</title>
+<style>
+:root {
+  --bg: #f3f5f6;
+  --surface: #ffffff;
+  --text: #1b2227;
+  --muted: #5b6770;
+  --line: #d3dade;
+  --accent: #0b6e8a;
+  --warn: #9a5b00;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181b;
+    --surface: #1c2227;
+    --text: #e6ebee;
+    --muted: #9aa6ae;
+    --line: #2d363c;
+    --accent: #5cc3df;
+    --warn: #e3a64a;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 17px/1.65 "Segoe UI", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .5rem; letter-spacing: -.01em; }
+h2 { font-size: 1.3rem; margin: 2.75rem 0 1rem; padding-bottom: .4rem; border-bottom: 2px solid var(--accent); }
+h3 { font-size: 1.05rem; margin: 1.5rem 0 .4rem; }
+p, ul, ol { margin: 0 0 1rem; }
+.lede { color: var(--muted); margin-bottom: 2rem; }
+.entry { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 6px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.entry h3:first-child { margin-top: 0; }
+time { color: var(--muted); font-size: .9rem; }
+.status { font-weight: 600; }
+.status.dropped { color: var(--warn); }
+.status.active { color: var(--accent); }
+figure { margin: 1rem 0; }
+figure img { max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: 4px; }
+figcaption { color: var(--muted); font-size: .9rem; margin-top: .3rem; }
+.q { border-top: 1px solid var(--line); padding: .9rem 0; }
+.q:first-of-type { border-top: 0; }
+.q p { margin: 0 0 .3rem; }
+.q .a { color: var(--muted); }
+kbd { font: .85em ui-monospace, Consolas, monospace; background: var(--bg); border: 1px solid var(--line); border-radius: 3px; padding: .05em .4em; }
+.palette { display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .9rem; margin: 1rem 0; padding: 0; list-style: none; }
+.palette li { margin: 0; }
+.swatch { height: 3.5rem; border-radius: 4px; border: 1px solid var(--line); }
+.palette code { display: block; margin-top: .35rem; font: .85em ui-monospace, Consolas, monospace; }
+.palette span { display: block; font-size: .85rem; color: var(--muted); line-height: 1.35; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ioniq 5 Interior: Blender Build Log</h1>
+  <p class="lede">A running record of rebuilding the Hyundai Ioniq 5 front end and redesigning its dashboard in Blender, one piece at a time. The goal is a first-person view that feels like sitting in the car, so looking left or right while recording never breaks the illusion.</p>
+
+  <h2>Progress</h2>
+
+  <article class="entry">
+    <h3>Turn signal and start/stop handles, then the front left door</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+
+    <h3>Turn signal and start/stop handles</h3>
+    <p><span class="status dropped">Set aside.</span> I tried extruding different faces from the housing behind the steering wheel to form the turn signal stalk and the start/stop control. I didn't like how it looked, so I removed it. I'll come back to these later, when I work on the back end.</p>
+
+    <h3>Front left door</h3>
+    <p><span class="status active">In progress.</span> The door started as a cube and is now a thin panel. Next steps:</p>
+    <ol>
+      <li>Split the panel in half with a horizontal loop cut (<kbd>Ctrl</kbd> + <kbd>R</kbd>).</li>
+      <li>Extrude the lower half to form the armrest area and the storage pocket at the bottom of the door.</li>
+    </ol>
+
+    <h3>Up next</h3>
+    <ul>
+      <li>Rear view mirror.</li>
+      <li>Roof, at least enough to frame the view.</li>
+    </ul>
+    <p>The goal is enough surrounding geometry that the camera can pan left and right without exposing empty space.</p>
+  </article>
+
+  <article class="entry">
+    <h3>Gathering reference images</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Collecting references to guide the door and the roof:</p>
+    <ul>
+      <li><strong>Open front door:</strong> reference images of the Ioniq 5 door with it open, to check the armrest and lower storage pocket shapes against my panel.</li>
+      <li><strong>Rear view mirror:</strong> how it looks and how far back it sits from the top of the windshield.</li>
+    </ul>
+    <p>The mirror's position will tell me how much roof I need to build. Only the part of the roof that can be seen from the driver's view needs geometry.</p>
+  </article>
+
+  <article class="entry">
+    <h3>Windshield glass panel</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> The windshield is a single plane with a Solidify modifier (Simple mode, 4 mm thickness, offset -1, rim fill on). It is tilted about 24 degrees on the Y axis and sits in the dark frame above the dashboard. The next step is giving it a glass material.</p>
+    <figure>
+      <img src="images/windshield-plane-solidify.png" alt="Blender viewport showing the windshield plane selected above the dashboard, with the Solidify modifier settings in the Properties panel" loading="lazy">
+      <figcaption>The windshield plane selected, with Solidify set to 4 mm.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Windshield glass material test</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> The glass material is on the windshield. In Material Preview, the glass is see-through and shows the HDRI background (blurred greenery) behind the dashboard. When I switch to the rendered viewport shading, the whole scene turns pink. See Open Questions for the likely cause and fix.</p>
+    <figure>
+      <img src="images/material-preview-glass.png" alt="Material Preview of the cabin with the windshield showing a blurred green HDRI background through the glass" loading="lazy">
+      <figcaption>Material Preview: the glass transmits the HDRI background.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/rendered-view-pink.png" alt="The same cabin view with everything tinted pink in the rendered viewport shading" loading="lazy">
+      <figcaption>Rendered viewport shading: the whole scene, background included, turns pink.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>HDRI background and dark glass</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> The World now uses an HDRI (<code>rathaus_4k.exr</code>: Environment Texture, equirectangular, strength 1.0), and the pink is gone. The new problem is that the windshield looks too dark and greenish. The areas outside the glass, past the pillars, show the HDRI much brighter.</p>
+    <figure>
+      <img src="images/hdri-dark-glass.png" alt="Rendered viewport from the driver's seat with a night HDRI behind the windshield, which looks dark and green compared with the brighter areas outside the glass" loading="lazy">
+      <figcaption>Rendered viewport with the HDRI in the World. The glass area is noticeably darker than the unglazed edges.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Glass shows the sky instead of the scene behind it</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> I switched the World to a new HDRI (<code>cedar_bridge_2_4k.exr</code>, strength 1.0). Found the real problem: the glass is not behaving as transparent. Through the windshield I see clouds, but beyond the pillars I see the bridge and the area behind it. The glass seems to be reflecting or bending the HDRI rather than showing what is actually behind it.</p>
+    <figure>
+      <img src="images/glass-shows-sky.png" alt="Rendered viewport from the driver's seat. The windshield shows blue sky and clouds while the areas beyond the pillars show a bridge and buildings" loading="lazy">
+      <figcaption>The windshield shows sky and clouds; the gaps beyond the pillars show the bridge.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Dashboard colors and rear view mirror</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Went through reference images to pick the dashboard colors.</p>
+    <h3>Color direction</h3>
+    <ul>
+      <li><strong>Edge around the window:</strong> tan.</li>
+      <li><strong>Dashboard below the screen:</strong> a darker gray.</li>
+    </ul>
+    <h3>Rear view mirror</h3>
+    <p>Modeling both the mirror base (the mount) and the mirror itself. Next, I&rsquo;ll apply the mirror material settings from Open Questions below and push it toward more reflective: Metallic at 1 with very low roughness.</p>
+    <figure>
+      <img src="images/progress-mirror-selected.png" alt="Cabin view with a clear windshield showing a bridge scene, a tan trim around the window, a gray dashboard, and the small rear view mirror selected at the top of the windshield" loading="lazy">
+      <figcaption>Progress so far: the windshield is now clear, with tan trim, a gray dashboard, and the rear view mirror (selected) at the top of the glass.</figcaption>
+    </figure>
+    <p>Created a <code>glass.mirror</code> material on the <code>mirror.rearview.glass</code> object (Metallic 1, Roughness 0). Still need to assign it to the mirror faces and turn Transmission off.</p>
+    <figure>
+      <img src="images/mirror-material-settings.png" alt="Blender Edit Mode on the mirror glass object, with the glass.mirror material selected in the slot list and Principled BSDF settings shown in the Properties panel" loading="lazy">
+      <figcaption>Edit Mode on the mirror glass object with the glass.mirror material and its Principled BSDF settings.</figcaption>
+    </figure>
+    <p>Testing the mirror: I placed a red square behind the car to see whether it shows up in the rear view mirror. It does not appear yet.</p>
+    <figure>
+      <img src="images/mirror-test-red-plane.png" alt="Outside view of the cabin model with a large red square standing behind the car, used as a test target for the rear view mirror reflection" loading="lazy">
+      <figcaption>The red test square placed behind the car.</figcaption>
+    </figure>
+    <h3>Result: the mirror reflects</h3>
+    <p><span class="status active">Working.</span> The red square now shows up in the rear view mirror. The setup that made it work: EEVEE with Raytracing turned on in the Render tab, plus a Sphere Light Probe placed right at the mirror. The mirror stays a Principled BSDF with Metallic 1 and Roughness 0.</p>
+    <figure>
+      <img src="images/mirror-reflection-works.png" alt="Rendered view from the driver's seat showing the red square reflected in the rear view mirror, with the sphere light probe around the mirror and Raytracing ticked in the Render tab" loading="lazy">
+      <figcaption>The red square reflected in the rear view mirror. The Sphere Light Probe is the circle around the mirror, and Raytracing is ticked in the Render tab.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Mirror tweaks, night HDRI test and the remaining build list</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Making small adjustments to the rear view mirror. I switched the World back to the dark, rainy street HDRI (<code>rathaus_4k.exr</code>) to see how the mirror holds up in gloomy lighting. The light probe is now named <code>mirror.rearview.reflectionSphere</code>.</p>
+    <figure>
+      <img src="images/mirror-night-test.png" alt="Rendered viewport of the cabin model on a wet night street, using the rainy HDRI, with the reflection sphere visible around the rear view mirror" loading="lazy">
+      <figcaption>Night test with the rainy HDRI. The reflection sphere sits at the mirror.</figcaption>
+    </figure>
+    <h3>Remaining pieces to add</h3>
+    <p>These should be the last new pieces:</p>
+    <ol>
+      <li><strong>Roof:</strong> adding it now.</li>
+      <li><strong>Doors:</strong> adjust them next.</li>
+      <li><strong>Front pillar:</strong> build the front pillar of the door to close the gap that shows when looking around, so the peripheral view stays believable.</li>
+    </ol>
+    <h3>After that</h3>
+    <ul>
+      <li>Fine-tune details such as the screen and the console.</li>
+      <li>Add an interior light. The roof will make the cabin darker.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Reference color palette</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">Reference.</span> Colors sampled from an Ioniq 5 interior reference photo, to use as Base Colors for the dashboard, trim, seats and lights.</p>
+    <figure>
+      <img src="images/ioniq5-interior-reference.png" alt="Reference photo of the Ioniq 5 interior showing the beige headliner, gray-green dashboard, light leather seats and console, and a green ambient light strip" loading="lazy">
+      <figcaption>Reference photo the palette was sampled from.</figcaption>
+    </figure>
+    <ul class="palette">
+      <li><div class="swatch" style="background:#C5C7C0"></div><code>#C5C7C0</code><span>Seat and console leather</span></li>
+      <li><div class="swatch" style="background:#B4B1AC"></div><code>#B4B1AC</code><span>Door pad and armrest</span></li>
+      <li><div class="swatch" style="background:#A39890"></div><code>#A39890</code><span>Headliner and window trim (the tan)</span></li>
+      <li><div class="swatch" style="background:#323837"></div><code>#323837</code><span>Dashboard top</span></li>
+      <li><div class="swatch" style="background:#4B4E4E"></div><code>#4B4E4E</code><span>Dashboard pad under the screen</span></li>
+      <li><div class="swatch" style="background:#101317"></div><code>#101317</code><span>Lower dashboard and shadows</span></li>
+      <li><div class="swatch" style="background:#CBCBC8"></div><code>#CBCBC8</code><span>Steering wheel, light parts</span></li>
+      <li><div class="swatch" style="background:#1D1F21"></div><code>#1D1F21</code><span>Steering wheel, dark parts</span></li>
+      <li><div class="swatch" style="background:#222326"></div><code>#222326</code><span>Rear view mirror housing</span></li>
+      <li><div class="swatch" style="background:#010508"></div><code>#010508</code><span>Floor</span></li>
+      <li><div class="swatch" style="background:#0BA57A"></div><code>#0BA57A</code><span>Ambient light strip on the dash</span></li>
+      <li><div class="swatch" style="background:#4D8772"></div><code>#4D8772</code><span>Ambient glow on the doors</span></li>
+    </ul>
+    <p>These were measured from a photo, so lighting and shadows shift them a little. Treat them as starting points. In Blender, click a Base Color swatch, open the Hex tab in the color picker, and paste the code. For the light strip, use the green as the Emission color.</p>
+  </article>
+
+  <article class="entry">
+    <h3>Arms added and first full render</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Appended the rigged arms from my other file and posed the hands on the steering wheel. Switched the World to a desert road HDRI and rendered the driver's view.</p>
+    <figure>
+      <img src="images/arms-render-desert.png" alt="Rendered driver's view with both hands on the steering wheel, a dark dashboard with two glossy black screens, and a desert road through the windshield. The rear view mirror at the top shows flat blue" loading="lazy">
+      <figcaption>First render with the arms in place. The rear view mirror (top right) shows flat blue.</figcaption>
+    </figure>
+    <h3>Issues spotted</h3>
+    <ul>
+      <li><strong>Rear view mirror:</strong> shows a flat blue instead of the road behind. It is most likely reflecting the sky above the car. See Open Questions.</li>
+      <li><strong>Bottom right:</strong> part of the rig's head pokes into the camera. Move the camera slightly forward, or hide the head from the camera (Object Properties &gt; Visibility).</li>
+      <li><strong>Left edge:</strong> the flat end of the door panel shows. The front pillar on the build list will close this gap.</li>
+    </ul>
+  </article>
+
+  <article class="entry">
+    <h3>Infotainment screen image</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Adding a placeholder UI image to the infotainment screen, to preview how the screen will look before I bring in my Figma prototype. The goal is to keep the glossy black screen look from the render above, with the image glowing underneath. Setup steps are in Open Questions.</p>
+    <p>First try: the image is on the screen and the gloss holds up, but it came in rotated 90 degrees, so the text runs vertically.</p>
+    <figure>
+      <img src="images/infotainment-image-sideways.png" alt="Close-up of the dashboard with the infotainment screen selected, showing a car settings menu image rotated sideways so the text reads vertically" loading="lazy">
+      <figcaption>The UI image on the infotainment screen, rotated 90 degrees. Fix in Open Questions.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Both screens filled, camera set up for animation</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Both screens now show UI images the right way up: the driver cluster on the left with the speed and power gauges, and the infotainment menu on the right. The camera is set up at the driver's eye for the first animation pass.</p>
+    <ul>
+      <li><strong>Camera:</strong> location (-0.46, -0.76, 1.27) m, rotation (73&deg;, 0&deg;, -12.6&deg;), 26 mm focal length, clip start 0.1 m.</li>
+      <li><strong>Rig:</strong> the arms (<code>basicRig</code>) sit on the wheel. From this angle the cut-off ends of the upper arms show near the bottom of the frame, so keep them outside the camera view or hide them.</li>
+      <li><strong>Mirror:</strong> still shows blue, so it still needs the angle fix from Open Questions.</li>
+    </ul>
+    <p>Next: keyframe a basic animation, starting with the camera looking around and the hands on the wheel. Steps are in Open Questions.</p>
+    <figure>
+      <img src="images/camera-setup-screens.png" alt="Blender viewport from behind the driver's seat with the camera selected, showing the camera frame around the dashboard, UI images on both screens, the arms on the steering wheel, and the camera's transform and lens settings" loading="lazy">
+      <figcaption>Both screens showing UI images, with the camera selected and its frame (dashed box) around the dashboard.</figcaption>
+    </figure>
+  </article>
+
+  <article class="entry">
+    <h3>Roof light, night scene and a Cycles test</h3>
+    <time datetime="2026-10-26">October 26, 2026</time>
+    <p><span class="status active">In progress.</span> Added a roof light (<code>light.roof.front</code>) and keyframed it turning on. Switched to a dusk HDRI and tried a render in Cycles (CPU, Denoise on for the final render). The screens, ambient strip and hands look good. The rear view mirror looks very different from EEVEE: the red test square fills most of it, and part of it is blown out to white.</p>
+    <figure>
+      <img src="images/cycles-mirror-zoomed.png" alt="Cycles render through the camera at dusk, showing both dashboard screens lit, the green ambient strip, the hands on the wheel, and the rear view mirror filled with a large red square and a bright white patch" loading="lazy">
+      <figcaption>Cycles render: the mirror is filled by the red test square, with a blown-out white area on the left.</figcaption>
+    </figure>
+  </article>
+
+  <h2>Open Questions</h2>
+  <div class="q">
+    <p><strong>How do I make the windshield glass, and keep reflections low?</strong></p>
+    <div class="a">
+      <p><strong>Geometry.</strong> Skip the cube. Use a single curved surface shaped to the windshield (a subdivided plane works), and add a Solidify modifier for about 4 to 5 mm of thickness if the edge will ever be visible from the cabin.</p>
+      <p><strong>Material.</strong> In the Principled BSDF, set Transmission to 1, Roughness near 0 to 0.05, and IOR around 1.45. A tint is optional; a very slight blue or green looks like real automotive glass.</p>
+      <p><strong>Cutting reflections.</strong></p>
+      <ul>
+        <li>Lower the Specular (IOR Level) value, and as a cheat, lower the IOR toward 1.05 to 1.1. Both reduce how much the glass reflects.</li>
+        <li>Keep the interior lighting dim and the world/HDRI strength modest. The glass can only reflect what is lit.</li>
+        <li>In Cycles, turn off the glass object's Shadow ray visibility so it does not block sunlight.</li>
+      </ul>
+      <p>In Eevee, check the material's render method (blended or dithered) and enable screen space refraction or raytracing, depending on your Blender version, so the transmission shows.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>How do I set up the material on the windshield plane?</strong></p>
+    <div class="a">
+      <ol>
+        <li>With the plane selected, open the Material tab in the Properties panel (the red sphere icon at the bottom of the tab column) and click New. Name it something like "Windshield Glass".</li>
+        <li>In the Principled BSDF, set Transmission to 1, Roughness to 0 to 0.05, and IOR to about 1.45. Keep Base Color near white, or add a faint blue-green tint.</li>
+        <li>Lower Specular (IOR Level) from 0.5 to around 0.2 to cut reflections.</li>
+        <li>In Eevee, open the material's Settings and use a blended render method (Blend Mode set to Alpha Blend in older versions) so the glass shows properly.</li>
+      </ol>
+      <p><strong>Simpler option for recording:</strong> skip Transmission and set Alpha to about 0.1 to 0.2. The glass stays see-through, reflects very little, and renders faster.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>Why does everything turn pink in the rendered viewport, and how do I remove it?</strong></p>
+    <div class="a">
+      <p><strong>Most likely cause:</strong> the World. Pink or magenta is Blender's color for a missing texture, and the background is pink too, so the World shader is probably pointing at an environment image that can't be found. Rendered shading uses the World, while Material Preview uses its own built-in HDRI, which is why only Rendered turns pink.</p>
+      <ol>
+        <li>Open the Properties panel and click the World tab (the red globe icon).</li>
+        <li>Under Surface, check the Color. If it is an Environment Texture with a missing image, or a pink swatch, click it and switch it to Color.</li>
+        <li>Set the color to a neutral dark gray. A dim world also helps keep reflections on the glass low.</li>
+        <li>If the tab only shows a New button, click it to create a world, then set the color the same way.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>The HDRI works, but the windshield is too dark. How do I brighten it?</strong></p>
+    <div class="a">
+      <p><strong>Most likely cause:</strong> the glass material itself. Transmission is multiplied by the Base Color, so a gray or green base color darkens everything seen through the glass. The unglazed edges of the view look brighter, which points to the glass rather than the HDRI.</p>
+      <ol>
+        <li>Open the Material tab and set Base Color to pure white, or a very light tint.</li>
+        <li>Keep Transmission at 1 and Roughness at 0 to 0.05.</li>
+        <li>If it is still dark in Eevee, try toggling the refraction or raytracing setting in the Render tab.</li>
+        <li>If the HDRI is just a dim night scene, raise the World Strength to about 2, or raise Exposure under Color Management by about 1. Keep the glass Specular (IOR Level) low so a brighter world doesn't add reflections.</li>
+      </ol>
+      <p><strong>Alternative:</strong> set Transmission to 0 and Alpha to about 0.1 to 0.2. The glass stays clear and does not darken the view.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>Why does the glass show clouds instead of the scene behind it, and how do I make it truly transparent?</strong></p>
+    <div class="a">
+      <p><strong>Most likely cause:</strong> in Eevee, Transmission with an IOR of about 1.45 on a single thin surface bends the view heavily, so the glass shows a different part of the HDRI (higher sky) than what is really behind it. Surface reflection (Fresnel) on a steeply raked windshield adds to the effect. Real glass bends light twice, in and out, so the two cancel out. A single surface only bends it once.</p>
+      <ol>
+        <li>Set IOR to 1.0 in the Principled BSDF. That removes both the bending and the Fresnel reflection, so the glass looks clear.</li>
+        <li>If you are on a newer Eevee, open Material Settings and set Thickness to Slab so thin glass does not bend the view.</li>
+        <li>Use a white or very light Base Color. A blue tint adds to the sky-blue look.</li>
+        <li>Simplest option: set Transmission to 0 and Alpha to about 0.1 to 0.2.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>Principled BSDF? Can you explain what it stands for and where to go? I&rsquo;m only seeing IOR on the material.</strong></p>
+    <div class="a">
+      <h3>What BSDF means</h3>
+      <p>BSDF stands for <strong>Bidirectional Scattering Distribution Function</strong>. In Blender, a BSDF is a shader that tells the renderer how light interacts with a surface: how it bounces off (reflection) or passes through (transmission). That is why Blender has nodes named Diffuse BSDF, Glossy BSDF, Glass BSDF, Transparent BSDF and Principled BSDF.</p>
+      <p>The <strong>Principled BSDF</strong> is the all-in-one version: one shader with sliders that can make metal, plastic, glass, glowing surfaces and more.</p>
+      <h3>Where to find it</h3>
+      <ol>
+        <li>Select the object, then open the Properties panel and click the Material tab (the sphere icon at the bottom of the tab column).</li>
+        <li>In the Surface panel, the Surface field shows which shader is used. If it says Principled BSDF, its settings are listed below.</li>
+        <li>Base Color, Metallic, Roughness, IOR and Alpha are visible by default. Specular (IOR Level) and Transmission (Weight) are inside collapsed sections; click the small arrow next to each name to expand it.</li>
+        <li>If the Surface field says Glass BSDF instead, it only has Color, Roughness and IOR. That is a simpler glass shader with no Transmission or Specular sections. Set IOR to 1.0 and Color to white there.</li>
+      </ol>
+      <h3>When to use which shader</h3>
+      <ul>
+        <li><strong>Principled BSDF:</strong> the default for almost everything. Use it when you want full control, such as the dashboard plastics, steering wheel and the screen frames.</li>
+        <li><strong>Glass BSDF:</strong> a quick, simple glass with only Color, Roughness and IOR. Good for plain windows when you don&rsquo;t need extra controls.</li>
+        <li><strong>Transparent BSDF:</strong> fully see-through, with no bending and no reflection. A strong option for a windshield that should look completely clear while recording.</li>
+        <li><strong>Emission:</strong> for things that glow, like the light strip across the dashboard and the screens.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>What does IOR mean?</strong></p>
+    <div class="a">
+      <p>IOR stands for <strong>Index of Refraction</strong>. It is a number that says how much light bends when it passes from one material into another, and how reflective the surface is at glancing angles.</p>
+      <h3>Common values</h3>
+      <ul>
+        <li>Air: 1.0 (no bending)</li>
+        <li>Water: about 1.33</li>
+        <li>Window glass: about 1.45 to 1.52</li>
+        <li>Diamond: about 2.42</li>
+      </ul>
+      <h3>Why it matters here</h3>
+      <p>A higher IOR means more bending and more reflection. On the windshield, a single surface with an IOR of about 1.45 bends the view and reflects the sky, so it showed clouds instead of the scene behind it. Setting IOR to 1.0 removes both effects and makes the glass look clear.</p>
+      <h3>When to change it</h3>
+      <p>Use realistic values (about 1.5) for glass you want to see bending light, such as a bottle or a thick lens. Use 1.0 for thin, flat panes like a windshield when you want them to look transparent.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>What about for a mirror? What settings do I use for the rear view mirror?</strong></p>
+    <div class="a">
+      <p>Give the mirror surface its own material, separate from the plastic housing around it (a separate face or object with its own material slot).</p>
+      <h3>Option 1: Principled BSDF</h3>
+      <ul>
+        <li>Metallic: 1</li>
+        <li>Roughness: 0 to 0.03. A tiny bit of roughness hides imperfections.</li>
+        <li>Base Color: light gray, about 0.8 to 0.9, rather than pure white. Real mirrors are never perfect.</li>
+        <li>IOR does not matter for a fully metallic surface.</li>
+      </ul>
+      <h3>Option 2: Glossy BSDF</h3>
+      <p>The simpler choice. Set Color to white or light gray and Roughness to 0. Use it when you only need a mirror and nothing else.</p>
+      <h3>Seeing reflections</h3>
+      <p>In Cycles, mirror reflections work automatically. In Eevee, a mirror may only reflect the HDRI unless you turn on raytracing (newer versions) or Screen Space Reflections (older versions) in the Render tab. For a small rear view mirror, reflecting the HDRI is usually convincing enough.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>Why can&rsquo;t I find the Apply button for the materials on my mirror?</strong></p>
+    <div class="a">
+      <p>There is no Apply button for materials. A material takes effect as soon as it is linked to the object. The only button named like that is Assign, and it only shows up in Edit Mode.</p>
+      <h3>If the mirror is its own object</h3>
+      <ol>
+        <li>Click the mirror to select it.</li>
+        <li>Open the Properties panel and click the Material tab (the sphere icon at the bottom of the tab column). It only appears when a mesh object is selected.</li>
+        <li>Click New to create a material, or use the sphere dropdown next to it to pick one you already made.</li>
+        <li>Set Metallic to 1, Roughness to 0, and Base Color to light gray.</li>
+      </ol>
+      <h3>If the mirror is part of a bigger object</h3>
+      <ol>
+        <li>Press Tab to enter Edit Mode and select only the mirror faces.</li>
+        <li>In the Material tab, pick a slot (or click + to add one) and create the material.</li>
+        <li>Click Assign. It is under the slot list and only appears in Edit Mode.</li>
+      </ol>
+      <p>Tip: the mirror has a non-uniform scale (0.023, 0.070, 1.184). Pressing Ctrl+A in Object Mode and choosing Scale applies it, which keeps shading and modifiers behaving evenly.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>I&rsquo;m in Edit Mode on the mirror with a glass.mirror material. What do I do now?</strong></p>
+    <div class="a">
+      <p>The object has two material slots, <code>glass.windshield.001</code> and <code>glass.mirror</code>. The mirror faces may still be using the windshield slot, so they stay see-through until they are assigned to the mirror slot.</p>
+      <ol>
+        <li>In Edit Mode, make sure the mirror faces are selected (face select mode).</li>
+        <li>In the slot list, click <code>glass.mirror</code> so it is highlighted.</li>
+        <li>Click Assign, just below the slot list.</li>
+        <li>In the Principled BSDF, open the Transmission section and set Weight to 0. Transmission was left at 1 from the glass material and conflicts with Metallic 1.</li>
+        <li>Press Tab to go back to Object Mode and check the result in Material Preview or Rendered view.</li>
+      </ol>
+      <p>Metallic 1 and Roughness 0 already match the mirror settings above. If the mirror looks too dark, raise Base Color toward light gray (about 0.8 to 0.9).</p>
+      <h3>Checking what is assigned</h3>
+      <p>With a slot highlighted, Select highlights every face using it, and Deselect removes them from the selection. Use these to see which faces belong to each material.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>I put a red square behind the car to test the rear view mirror, but I can&rsquo;t see it in the mirror. Why?</strong></p>
+    <div class="a">
+      <p><strong>Most likely cause:</strong> in Eevee, mirrors mainly reflect the HDRI and whatever is visible on screen. The red square is behind the viewer, off screen, so Eevee has nothing to reflect unless you give it more information.</p>
+      <ol>
+        <li>Switch the viewport to Rendered view, then open the Render tab and turn on Raytracing (newer Eevee) or Screen Space Reflections (older Eevee).</li>
+        <li>Add a Sphere Light Probe near the mirror (Add &gt; Light Probe &gt; Sphere) and bake it if it asks, so Eevee can capture objects behind the car.</li>
+        <li>Or switch the Render Engine to Cycles. Mirror reflections are accurate by default, including objects off screen, but it renders slower.</li>
+      </ol>
+      <h3>Also check the layout</h3>
+      <ul>
+        <li>View from the driver&rsquo;s seat, looking at the mirror. From outside the car you will not see the reflection.</li>
+        <li>The red square needs to sit along the reflection line: behind the driver, roughly at head height, and large enough to fill the mirror.</li>
+        <li>Rotate the mirror a little until the reflection points back at the square.</li>
+      </ul>
+      <h3>Result</h3>
+      <p>It worked. With Raytracing on and a Sphere Light Probe at the mirror, the red square shows up in the rear view mirror. See the mirror entry above for the screenshot.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>What kind of light should I use for the interior roof light: point, spot or area?</strong></p>
+    <div class="a">
+      <p><strong>Use an Area light.</strong> It spreads soft, even light, like a real dome light, and it looks good in Eevee.</p>
+      <h3>Why not the others</h3>
+      <ul>
+        <li><strong>Point:</strong> a tiny source that makes bright hotspots on the roof lining and trim close to it.</li>
+        <li><strong>Spot:</strong> a cone with a defined edge. Better for a reading light aimed at one spot, such as the driver&rsquo;s lap.</li>
+        <li><strong>Sun:</strong> meant for outdoor daylight, not interiors.</li>
+      </ul>
+      <h3>Setup</h3>
+      <ol>
+        <li>Add &gt; Light &gt; Area.</li>
+        <li>Place it just under the roof, near the center, facing down (the default direction).</li>
+        <li>In the Light properties (Object Data tab), set the Shape to Rectangle or Square, about 0.25 to 0.4 m in size.</li>
+        <li>Start the Power around 10 to 20 W and adjust by eye. Use a slightly warm white for the color.</li>
+        <li>Keep it low enough that it does not wash out the reflections in the rear view mirror.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>I have rigged arms in another file. How do I add them without opening a whole new file?</strong></p>
+    <div class="a">
+      <p>Use File &gt; Append. It copies objects from another .blend file into the one you are working in.</p>
+      <ol>
+        <li>Save your current file first (Ctrl+S).</li>
+        <li>Go to File &gt; Append and browse to the .blend file that has the arms.</li>
+        <li>Double-click the file to look inside it. If the arms are in a collection, open the Collection folder and select that collection. Otherwise open the Object folder and select both the armature and the arm mesh.</li>
+        <li>Click Append. The rig comes in with its bones, vertex groups and modifiers intact.</li>
+        <li>Move the arms into position with G, and keep them in their own collection so they are easy to hide or isolate.</li>
+      </ol>
+      <h3>Append vs Link</h3>
+      <p>Append makes a full copy you can pose and edit. Link keeps a live reference to the original file, but you cannot pose a linked rig until you make a Library Override. Append is the simpler choice here.</p>
+      <h3>Quick alternative</h3>
+      <p>Open the arms file in a second Blender window, select the armature and mesh, and press Ctrl+C. Then press Ctrl+V in the viewport of this file. Append is more reliable for rigs.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>I rendered it and the rear view mirror doesn&rsquo;t seem to work. It just shows blue. Why?</strong></p>
+    <div class="a">
+      <p><strong>Most likely cause:</strong> the mirror is working, but it is aimed at the sky. The flat, saturated blue with no horizon matches the desert HDRI's sky straight overhead. The camera sits lower than the mirror and off to the driver's side, and the mirror faces straight back. So from the driver's eye it bounces the view up and over the car. With no roof, rear window or back seats yet, there is nothing behind the car to see except sky.</p>
+      <h3>Fix the angle</h3>
+      <ol>
+        <li>Look through the camera (<kbd>Numpad 0</kbd>) in Rendered view, so you see what the render sees.</li>
+        <li>Select <code>mirror.rearview.glass</code>, plus the back and base if they are separate, so they move together.</li>
+        <li>Press <kbd>R</kbd> then <kbd>Z</kbd> and turn it about 10 to 20 degrees toward the driver.</li>
+        <li>Press <kbd>R</kbd> and the axis that tips it forward, and tilt it down a few degrees.</li>
+        <li>Watch the mirror while you rotate. The blue should give way to the horizon, then the road behind.</li>
+      </ol>
+      <h3>If it still looks flat</h3>
+      <ul>
+        <li>Move <code>mirror.rearview.reflectionSphere</code> back to the mirror. Reflections come from the probe's position, and it does not follow the mirror.</li>
+        <li>Check that Raytracing is still ticked in the Render tab.</li>
+        <li>Render one frame in Cycles. If Cycles shows the road, the problem is the EEVEE probe setup. If Cycles also shows blue, the mirror needs more angle.</li>
+        <li>Put the red test square back behind the car at head height as a target to aim at.</li>
+      </ul>
+      <p>Once the roof and rear window exist, the mirror will pick up the headliner and rear glass, which reads much more like a real mirror.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>How do I put an image on the infotainment screen? (simple steps)</strong></p>
+    <div class="a">
+      <p>Do one screen at a time.</p>
+      <h3>1. Get the picture ready</h3>
+      <ol>
+        <li>In Figma, make a frame that is wide and short, matching the screen's shape. The Ioniq 5 screens are about 8:3, for example 1920 &times; 720 px. To check the exact shape, select the screen in Blender, press <kbd>N</kbd>, and compare its width and height.</li>
+        <li>Put the design in the frame and export it as a PNG (2x).</li>
+      </ol>
+      <h3>2. Pick the screen</h3>
+      <ol>
+        <li>Click the <code>Infotainment</code> object and press <kbd>Tab</kbd> for Edit Mode.</li>
+        <li>Press <kbd>3</kbd> on the top row for face select, and click only the flat screen face.</li>
+      </ol>
+      <h3>3. Give the screen its own material</h3>
+      <ol>
+        <li>Open the Material tab (the red ball icon).</li>
+        <li>Click <strong>+</strong> to add a slot, click <strong>New</strong>, and name it <code>screen.infotainment</code>.</li>
+        <li>Click <strong>Assign</strong>.</li>
+      </ol>
+      <h3>4. Make the picture fit</h3>
+      <ol>
+        <li>With the face still selected, press <kbd>U</kbd> and choose Unwrap.</li>
+        <li>Press <kbd>Tab</kbd> to go back to Object Mode.</li>
+      </ol>
+      <h3>5. Put the picture on</h3>
+      <ol>
+        <li>Open the Shading workspace and move the mouse into the node area.</li>
+        <li>Press <kbd>Shift</kbd> + <kbd>A</kbd> &gt; Texture &gt; Image Texture and click to place it.</li>
+        <li>Click Open and pick the PNG.</li>
+        <li>Drag from the yellow Color dot to <strong>Emission Color</strong> on the Principled BSDF. Expand the Emission section if it is hidden.</li>
+      </ol>
+      <h3>6. Keep it glossy</h3>
+      <ul>
+        <li>Base Color: black</li>
+        <li>Roughness: 0.05</li>
+        <li>Emission Strength: 1</li>
+        <li>Optional: Coat Weight 1 for an extra glass layer.</li>
+      </ul>
+      <h3>7. Check it</h3>
+      <p>Switch to Rendered view. If the picture is sideways, upside down or stretched, fix it in the UV Editing workspace (see the rotation question below). If it is too bright and the shine is gone, lower Emission Strength. Repeat for the left screen with a material named <code>screen.cluster</code>.</p>
+      <p><strong>Later:</strong> record the Figma prototype as an MP4, open it in the same Image Texture node, set it to Movie and turn on Auto Refresh. The screen will play the prototype in the render.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>I want to keep the glossy screen look from my render. Does the image ruin that?</strong></p>
+    <div class="a">
+      <p>No. Emission adds light on top of the surface, so reflections stay as long as the material stays glossy.</p>
+      <ul>
+        <li><strong>Base Color:</strong> black.</li>
+        <li><strong>Roughness:</strong> 0.02 to 0.08. This is what gives the gloss.</li>
+        <li><strong>Specular (IOR Level):</strong> leave at 0.5. Lowering it weakens reflections.</li>
+        <li><strong>Emission Color:</strong> the Figma image.</li>
+        <li><strong>Emission Strength:</strong> 0.8 to 1.5. Higher values drown out the reflections.</li>
+        <li><strong>Coat (optional):</strong> Weight 1, Roughness 0, for a cover-glass look with crisper reflections.</li>
+      </ul>
+      <p>Dark areas of the UI show the most reflection and bright areas the least, just like real car screens. A dark-mode design will look the most convincing.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>The image came in sideways on the screen. How do I rotate it?</strong></p>
+    <div class="a">
+      <p>Rotate the UVs, not the object. The UVs decide which way the image sits on the face.</p>
+      <ol>
+        <li>Select the <code>Infotainment</code> object and open the UV Editing workspace at the top.</li>
+        <li>On the right (3D view), press <kbd>Tab</kbd> for Edit Mode and select the screen face.</li>
+        <li>Move the mouse over the left panel (UV Editor) and press <kbd>A</kbd> to select the whole UV island.</li>
+        <li>Type <kbd>R</kbd>, then <kbd>9</kbd> <kbd>0</kbd>, then press <kbd>Enter</kbd>.</li>
+        <li>Check the 3D view. If it is still sideways or now upside down, press <kbd>R</kbd> <kbd>1</kbd> <kbd>8</kbd> <kbd>0</kbd> <kbd>Enter</kbd> (or use -90 instead).</li>
+        <li>If the text reads backwards, flip it: <kbd>S</kbd> <kbd>X</kbd> <kbd>-</kbd> <kbd>1</kbd> <kbd>Enter</kbd>.</li>
+        <li>Once it reads correctly, stretch it to fill the image: press <kbd>S</kbd> <kbd>X</kbd> or <kbd>S</kbd> <kbd>Y</kbd> and drag until the island covers the whole image square. Or right-click &gt; Unwrap again after rotating, then scale to fit.</li>
+        <li>Press <kbd>Tab</kbd> to return to Object Mode and check in Rendered view.</li>
+      </ol>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>How do I start recording keyframes and basic animations again?</strong></p>
+    <div class="a">
+      <p>A keyframe saves an object's position, rotation or scale at one frame. Blender fills in the motion between two keyframes.</p>
+      <h3>1. Set up the timeline</h3>
+      <ol>
+        <li>Open the Output tab (the printer icon) and set the Frame Rate, such as 24 or 30 fps.</li>
+        <li>In the Timeline at the bottom, set Start and End. At 24 fps, 240 frames is 10 seconds.</li>
+      </ol>
+      <h3>2. Keyframe an object (for example, the camera looking around)</h3>
+      <ol>
+        <li>Go to frame 1 and select the Camera.</li>
+        <li>Hover over the viewport and press <kbd>I</kbd>. This saves location and rotation. A yellow diamond appears in the timeline. (Or right-click a single value in the N panel, such as Rotation Z, and choose Insert Keyframe.)</li>
+        <li>Move to a later frame, such as 60. Rotate the camera: <kbd>R</kbd> <kbd>Z</kbd> <kbd>2</kbd> <kbd>5</kbd> <kbd>Enter</kbd> to look left.</li>
+        <li>Press <kbd>I</kbd> again.</li>
+        <li>Repeat. For example, look back to center at frame 120, then right at frame 180.</li>
+        <li>Press <kbd>Space</kbd> to play, and press it again to stop.</li>
+      </ol>
+      <h3>3. Keyframe the arms (pose the rig)</h3>
+      <ol>
+        <li>Select <code>basicRig</code> and press <kbd>Ctrl</kbd> + <kbd>Tab</kbd> for Pose Mode.</li>
+        <li>Click a bone, such as a hand or forearm, and pose it with <kbd>R</kbd> or <kbd>G</kbd>.</li>
+        <li>Press <kbd>I</kbd> to key the selected bones. Press <kbd>A</kbd> first to key every bone.</li>
+        <li>Change the frame, pose again, and press <kbd>I</kbd>. For example, turn the wheel by rotating the hands along with <code>swheel.wheel</code>, and key both.</li>
+      </ol>
+      <h3>4. Record mode (auto-keying)</h3>
+      <p>Click the round record button in the Timeline header. While it is on, every move or rotation you make is keyed automatically at the current frame. Remember to turn it off afterwards, or stray edits get keyed too.</p>
+      <h3>5. Editing keyframes</h3>
+      <ul>
+        <li>In the Timeline or Dope Sheet, click a diamond and press <kbd>G</kbd> to slide it in time, <kbd>X</kbd> to delete it, or <kbd>Shift</kbd> + <kbd>D</kbd> to copy it.</li>
+        <li><kbd>Alt</kbd> + <kbd>I</kbd> over the viewport removes the keyframe on the current frame.</li>
+        <li>Blender eases in and out between keys by default. For a steady camera pan, select the keys, press <kbd>T</kbd>, and choose Linear. For finer control, use the Graph Editor.</li>
+      </ul>
+      <h3>6. Render the animation</h3>
+      <ol>
+        <li>In the Output tab, set the output folder, and set File Format to FFmpeg Video with the MPEG-4 container.</li>
+        <li>Press <kbd>Ctrl</kbd> + <kbd>F12</kbd> (Render &gt; Render Animation).</li>
+      </ol>
+      <h3>Troubleshooting: no diamond appears</h3>
+      <p>If pressing <kbd>I</kbd> shows an &ldquo;Insert Keyframes: All Channels&rdquo; panel and no diamond, the mouse was over the Timeline, not the 3D viewport. In the Timeline, <kbd>I</kbd> only adds keys to channels that are already animated, so on a fresh object it does nothing. Move the mouse over the 3D viewport, make sure the object is selected (highlighted orange), and press <kbd>I</kbd> there. Also note that the Timeline only shows diamonds for selected objects.</p>
+      <p><strong>Tip for the first-person look:</strong> keep the camera's Location fixed and only key Rotation Z (left/right) and a little Rotation X (up/down). Small, slow turns, about 20 to 40 degrees over 1 to 2 seconds, feel like a real head turning.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>How do I animate a light turning on? I thought I could just change the Power between keyframes.</strong></p>
+    <div class="a">
+      <p>You can. The catch is that Power has to be keyed directly. Pressing <kbd>I</kbd> in the viewport only keys location, rotation and scale, not the light's power.</p>
+      <ol>
+        <li>Select the light and open the Object Data tab (the green light bulb icon).</li>
+        <li>Go to the frame where the light should still be off, and set Power to 0 W.</li>
+        <li>Hover the mouse over the Power field and press <kbd>I</kbd>, or right-click it and choose Insert Keyframe. The field turns yellow.</li>
+        <li>Go to the frame where the light should be on, and set Power to its full value, such as 15 W. The field turns orange, which means the value changed but is not saved yet.</li>
+        <li>Hover over Power and press <kbd>I</kbd> again. It turns yellow.</li>
+        <li>Scrub the timeline. Between the keys, the field shows green, meaning it is animated.</li>
+      </ol>
+      <h3>Field colors</h3>
+      <ul>
+        <li><strong>Yellow:</strong> keyed on this frame.</li>
+        <li><strong>Green:</strong> animated, but no key on this frame.</li>
+        <li><strong>Orange:</strong> changed but not keyed. Press <kbd>I</kbd> or the change is lost when you move frames.</li>
+      </ul>
+      <h3>Snap on instead of fading</h3>
+      <p>By default, Blender fades smoothly between the two keys. To make the light snap on like a real dome light, place the two keys one frame apart. Or select both keys in the Timeline, press <kbd>T</kbd>, and choose Constant.</p>
+      <h3>Glowing materials</h3>
+      <p>The same steps work for the screens and the ambient light strip. Key Emission Strength on their materials, from 0 to the normal value, for example to make the screens boot up after the dome light turns on.</p>
+      <h3>Follow-up: it still fades on slowly</h3>
+      <p>With the light selected, hover over the Timeline, press <kbd>A</kbd> to select all its keys, then press <kbd>T</kbd> and choose Constant. If the keys don&rsquo;t show in the Timeline, switch the bottom editor to the Dope Sheet, where they are listed under the light, and do the same there.</p>
+    </div>
+  </div>
+  <div class="q">
+    <p><strong>Why is the mirror blown out and zoomed in when I render in Cycles, compared to EEVEE?</strong></p>
+    <div class="a">
+      <p>Cycles traces the real reflection off the mirror's surface. EEVEE fakes it with the sphere probe, which captures the scene from one point and makes nearby things look smaller and farther away. So Cycles is closer to the truth, and three things in the scene make it look wrong.</p>
+      <h3>1. The red test square is right behind the car</h3>
+      <p>Because it is so close, it fills most of the mirror in a true reflection. Hide it from renders: click the camera icon next to it in the Outliner, or delete it now that the test is done.</p>
+      <h3>2. Smooth shading can bend the reflection</h3>
+      <p>A mirror with Shade Smooth on a few faces, or with unapplied non-uniform scale, acts like a curved fun-house mirror and magnifies the image.</p>
+      <ol>
+        <li>Select <code>mirror.rearview.glass</code>, right-click in the viewport, and choose Shade Flat.</li>
+        <li>Press <kbd>Ctrl</kbd> + <kbd>A</kbd> and choose Scale to apply the (0.023, 0.070, 1.184) scale.</li>
+      </ol>
+      <h3>3. The white patch is probably the roof light</h3>
+      <p>In Cycles, an Area light shows up in reflections as a bright rectangle, and <code>light.roof.front</code> sits right next to the mirror.</p>
+      <ul>
+        <li>Select the light and open Object Properties &gt; Visibility &gt; Ray Visibility. Untick Glossy so the mirror no longer sees the light itself, while the light still lights the cabin.</li>
+        <li>Set the mirror's Base Color to light gray (about 0.8) rather than pure white, so it does not reflect at full strength.</li>
+      </ul>
+      <h3>Grain in the viewport</h3>
+      <p>Rendered view in Cycles looks speckled because viewport Denoise is off. Tick Denoise under Sampling &gt; Viewport to preview more cleanly. The final render already has it on.</p>
+    </div>
+  </div>
+</main>
+</body>
+</html>
