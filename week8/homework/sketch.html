@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sketch</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+    canvas { display: block; width: 100% !important; height: auto !important; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/p5@2.4.0/lib/p5.min.js"></script>
+</head>
+<body>
+  <script>
+    // Loads iteration1.js ... iteration6.js based on ?i=N in the URL
+    const n = parseInt(new URLSearchParams(location.search).get('i'), 10);
+    if (n >= 1 && n <= 8) {
+      document.write('<script src="iteration' + n + '.js"><\/script>');
+    }
+  </script>
+</body>
+</html>

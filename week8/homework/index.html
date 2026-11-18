@@ -1,14 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework</title>
-        <link rel="stylesheet" href="css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.min.js"></script>
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Time and Oscillation: Space Invaders in p5.js</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 3rem 1rem 4rem; background: #ffffff; color: #1f1f1f;
+           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; }
+    main { max-width: 960px; margin: 0 auto; }
+    h1 { font-size: 2.1rem; line-height: 1.2; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.5rem; line-height: 1.3; margin: 2.75rem 0 0.75rem; }
+    a { color: #1a5fb4; }
+    code { font-family: Consolas, Menlo, monospace; font-size: 0.9em; background: #f0efec; padding: 0.1em 0.3em; border-radius: 4px; }
+    .writeup { background: #e7f1fb; border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .writeup p { margin: 0 0 1rem; }
+    .writeup p:last-child { margin-bottom: 0; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    @media (max-width: 720px) { .pair { grid-template-columns: 1fr; } }
+    figure { margin: 0; }
+    figure img, .window iframe { display: block; width: 100%; aspect-ratio: 4 / 3; border: 1px solid #d9d9d9; border-radius: 12px; background: #000; }
+    .window iframe { height: auto; }
+    figcaption { margin-top: 0.4rem; font-size: 0.9rem; font-style: italic; color: #555; }
+    .final iframe { border-radius: 12px; }
+    .table-wrap { overflow-x: auto; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #d9d9d9; padding: 0.5rem 0.75rem; text-align: left; vertical-align: top; }
+    th { background: #f0efec; }
+    .tag { display: inline-block; font-size: 0.8rem; font-weight: 600; background: #f0efec; border-radius: 999px; padding: 0.1rem 0.6rem; margin-left: 0.4rem; vertical-align: middle; }
+  </style>
 </head>
 <body>
-    <script src="sketch.js"></script>
+<main>
+  <h1>Time and Oscillation: Space Invaders in p5.js</h1>
+  <p>Ian Robinson, GIXD-501, Fall 2026 · Week 8 homework · Eight iterations</p>
+
+  <section class="writeup">
+    <p>I based this on Space Invaders. The moving shapes are the invader squares, which travel in a repeated swing-and-drop pattern. They sweep left and right on a <code>sin()</code> wave, speeding up as you clear them, and every time the wave reaches a wall they step down a row, until the grid resets to the top and the pattern starts again. The timed movement is the bullet: a small rectangle that shoots straight up from the player at random intervals measured with <code>millis()</code>. The triangle itself is the player, steered with the keyboard.</p>
+  </section>
+
+  <h2>How it meets the brief</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>Requirement</th><th>Where it is</th></tr>
+    <tr><td>Trigonometric function for repeated motion</td><td>The invaders' swing is <code>sin(phase) * 150</code>, and the drop counts each time that sine wave reaches a wall (<code>floor((phase + HALF_PI) / PI)</code>). The swing-and-drop pattern repeats forever.</td></tr>
+    <tr><td>Time function for the interval</td><td>The bullet fires when <code>millis()</code> passes <code>nextShotTime</code>, then a new interval is picked.</td></tr>
+    <tr><td>De-synchronized movements</td><td>The invaders run on the sine clock (frames). The bullets run on a random millisecond timer of 0.5–2 seconds. They never line up, so the bullets hit different columns every pass. The swing also speeds up as invaders are cleared, so its rhythm keeps changing too.</td></tr>
+    <tr><td>Randomness and Perlin noise</td><td><code>random(200, 1200)</code> picks each bullet's interval, so the firing rhythm is never the same. <code>noise()</code> gives every invader its own organic wobble.</td></tr>
+  </table>
+  </div>
+
+  <h2>Final sketch <span class="tag">Iteration 8</span></h2>
+  <p>Click the game, then use <strong>← →</strong> or <strong>A / D</strong> to move. Shots fire on their own. Clear all 40 invaders before the grid resets to win, and press <strong>R</strong> to restart.</p>
+  <div class="window final">
+    <iframe title="Final sketch: iteration 8" src="sketch.html?i=8"></iframe>
+  </div>
+
+  <h2>Iteration 1: Static layout</h2>
+  <section class="writeup">
+    <p>I set up the composition before adding any motion: three rows of eight white squares centered on a black canvas, with a triangle for the player at the bottom. My first try broke because I closed <code>draw()</code> too early, so the grid code ran before the canvas existed.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration1.png" alt="Iteration 1 still: three rows of white squares and a triangle"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 1 live" src="sketch.html?i=1" loading="lazy"></iframe><figcaption>Live · <a href="iteration1.js">code</a></figcaption></figure>
+  </div>
+
+  <h2>Iteration 2: The invaders sway</h2>
+  <section class="writeup">
+    <p>I made the whole grid swing left and right with <code>sin(frameCount * 0.02)</code>, which gives a smooth back-and-forth that repeats forever. I started with an 80px swing, but it was too small to read as invaders moving, so I pushed it up to 200px.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration2.png" alt="Iteration 2 still: the grid shifted to one side"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 2 live" src="sketch.html?i=2" loading="lazy"></iframe><figcaption>Live · <a href="iteration2.js">code</a></figcaption></figure>
+  </div>
+
+  <h2>Iteration 3: Dropping at the walls</h2>
+  <section class="writeup">
+    <p>Like the original game, the invaders now step down 20px every time they hit a wall. I chose both walls, not just one. Because the swing reaches a wall every half wave, I count those edge hits with <code>floor((phase + HALF_PI) / PI)</code>. The grid resets to the top before it reaches the player.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration3.png" alt="Iteration 3 still: the grid lower on the canvas"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 3 live" src="sketch.html?i=3" loading="lazy"></iframe><figcaption>Live · <a href="iteration3.js">code</a></figcaption></figure>
+  </div>
+
+  <h2>Iteration 4: The player fires on a random timer</h2>
+  <section class="writeup">
+    <p>The triangle now shoots a small rectangle after a random wait of 1–5 seconds. I use <code>millis()</code> to check when that time has passed, then pick a new random wait. The shots run on their own timer, so they never sync up with the swing. At this point they pass straight through the invaders.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration4.png" alt="Iteration 4 still: a shot flying up from the triangle"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 4 live" src="sketch.html?i=4" loading="lazy"></iframe><figcaption>Live · <a href="iteration4.js">code</a></figcaption></figure>
+  </div>
+
+  <h2>Iteration 5: Hits</h2>
+  <section class="writeup">
+    <p>When a shot overlaps an invader, both disappear, and the full grid comes back each time it loops to the top. The first version felt sluggish, so I tuned it: four rows of ten invaders, shots every 0.5–2 seconds and a slower, steadier swing. Since the shots come from the center while the grid swings, holes open up in different columns each time.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration5.png" alt="Iteration 5 still: four rows of invaders with gaps where shots hit"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 5 live" src="sketch.html?i=5" loading="lazy"></iframe><figcaption>Live · <a href="iteration5.js">code</a></figcaption></figure>
+  </div>
+
+  <h2>Iteration 6: Player control</h2>
+  <section class="writeup">
+    <p>The player can now steer the triangle with the arrow keys or A/D, and there's a controls label in the bottom left. A/D didn't work at first because p5.js 2.x reads <code>keyIsDown('a')</code> rather than the old number codes. Aiming changes the piece from something you watch into something you play.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration6.png" alt="Iteration 6 still: the player moved left, with the controls label"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 6 live" src="sketch.html?i=6" loading="lazy"></iframe><figcaption>Live · <a href="iteration6.js">code</a> · click it, then use ← → or A / D</figcaption></figure>
+  </div>
+
+  <h2>Iteration 7: Counter and win condition</h2>
+  <section class="writeup">
+    <p>I added an invader counter in the top left that counts down from 40 to 0. Clearing every invader before the grid loops back to the top brings up a "YOU WIN! Press R to restart" screen, and R resets the invaders, the shots, the player and the swing. I also brought the swing down to 150px so the wider grid stays on screen. Claude was mainly used to get the functions for this iteration: the counter loop, the win screen and the <code>keyPressed()</code> restart.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration7.png" alt="Iteration 7 still: invader counter in the top left, gaps in the grid"><figcaption>Still: counter in the top left</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 7 live" src="sketch.html?i=7" loading="lazy"></iframe><figcaption>Live · <a href="iteration7.js">code</a> · click it, then use ← → or A / D</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="iteration7-win.png" alt="Iteration 7 win screen: YOU WIN! Press R to restart"><figcaption>Still: win screen</figcaption></figure>
+  </div>
+
+  <h2>Iteration 8: Green player, wobble and speed-up</h2>
+  <section class="writeup">
+    <p>I made the player the classic Space Invaders green and moved the reset from <code>% 360</code> to <code>% 300</code>, because the invaders were sliding about two rows past the player before resetting. Now they stop just above the triangle. I added Perlin <code>noise()</code> so each invader wobbles on its own, which makes the grid feel alive instead of rigid. I also made the invaders speed up as you clear them, using <code>map()</code> on the number left, like the original game. The last few get frantic. Shots now fire every 0.2–1.2 seconds to keep up. It's hard, but I finally beat it.</p>
+  </section>
+  <div class="pair">
+    <figure><img src="iteration8.png" alt="Iteration 8 still: wobbling invader grid above the green player"><figcaption>Still</figcaption></figure>
+    <figure class="window"><iframe title="Iteration 8 live" src="sketch.html?i=8" loading="lazy"></iframe><figcaption>Live · <a href="iteration8.js">code</a> · click it, then use ← → or A / D</figcaption></figure>
+  </div>
+
+  <h2>Tools</h2>
+  <section class="writeup">
+    <p>Built in the p5.js web editor (p5.js 2.x). I used Claude throughout to explain p5 functions, suggest code for each step and debug errors such as missing braces and the A/D key issue. I made the design choices, tuning and testing myself.</p>
+  </section>
+</main>
 </body>
 </html>
