@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GIXD-503: Self-sustained garden by Ian Robinson | UML + p5.js</title>
+<style>
+:root{--ink:#1f2a24;--muted:#56645c;--leaf:#3e7c3a;--soil:#6b4a2f;--line:#d3dcd8;--bg:#f7f9f6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:700;line-height:1.2;margin:0}
+h1{font-size:clamp(2rem,5vw,3rem);margin-bottom:12px}
+h2{font-size:1.6rem;margin:56px 0 12px;padding-top:20px;border-top:2px solid var(--soil)}
+h3{font-size:1.15rem;margin:32px 0 6px}
+p{margin:0 0 14px;max-width:68ch}
+.lede{font-size:1.2rem;color:var(--muted);max-width:60ch}
+code{font:0.88em ui-monospace,Menlo,Consolas,monospace;background:#e8eee9;padding:1px 5px;border-radius:3px}
+#stage{margin:28px 0 8px}
+#sketch-holder{background:#ebf5ff;border:2px solid var(--soil);line-height:0;max-width:800px}
+#sketch-holder canvas{width:100% !important;height:auto !important}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 6px}
+.tools button{font:inherit;font-size:.95rem;padding:7px 14px;border:1.5px solid var(--soil);background:#fff;color:var(--ink);border-radius:4px;cursor:pointer}
+.tools button[aria-pressed="true"]{background:var(--soil);color:#fff}
+.tools button:focus-visible{outline:3px solid var(--leaf);outline-offset:2px}
+.note{font-size:.92rem;color:var(--muted)}
+figure{margin:18px 0 26px}
+figure img,figure svg{display:block;max-width:100%;height:auto;background:#fff;border:1px solid var(--line)}
+figure.narrow img{max-width:420px}
+figure.flow svg{max-width:680px}
+figcaption{font-size:.9rem;color:var(--muted);margin-top:6px;max-width:68ch}
+dl{margin:0 0 18px;display:grid;grid-template-columns:max-content 1fr;gap:8px 18px;max-width:760px}
+dt{font-weight:700}
+dd{margin:0}
+ul{padding-left:20px;max-width:68ch}
+li{margin-bottom:6px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:760px}
+footer{margin-top:60px;font-size:.9rem;color:var(--muted)}
+svg text{font-family:system-ui,sans-serif;dominant-baseline:central;text-anchor:middle}
+svg .h{font-size:14px;font-weight:600}
+svg .s{font-size:12px}
+svg .arr{stroke:#5F5E5A;stroke-width:1.5;fill:none}
+svg .n rect{stroke-width:.8}
+svg .gray rect{fill:#F1EFE8;stroke:#5F5E5A}svg .gray .h{fill:#2C2C2A}svg .gray .s{fill:#5F5E5A}
+svg .teal rect{fill:#E1F5EE;stroke:#0F6E56}svg .teal .h{fill:#085041}svg .teal .s{fill:#0F6E56}
+svg .coral rect{fill:#FAECE7;stroke:#993C1D}svg .coral .h{fill:#712B13}svg .coral .s{fill:#993C1D}
+svg .dec{fill:#fff;stroke:#5F5E5A;stroke-width:.8}
+svg .h{fill:#2C2C2A}svg .s{fill:#444441}
+</style>
+</head>
+<body>
+<main>
+
+<h1>A self-running garden</h1>
+<p class="lede">A small ecosystem of soil, seeds, plants, bees, and aphids. You can water it, seed it, weed it, and spray it, but I built it to keep going without you.</p>
+
+<section id="stage" aria-label="Live garden sketch">
+  <!-- Optional: add your OpenProcessing link here, e.g. <p class="note"><a href="...">View on OpenProcessing</a></p> -->
+  <div id="sketch-holder"></div>
+  <div class="tools" role="group" aria-label="Gardener tools">
+    <button type="button" data-m="1">1 Seed bag</button>
+    <button type="button" data-m="2">2 Watering can</button>
+    <button type="button" data-m="3">3 Remove plant</button>
+    <button type="button" data-m="4">4 Bug spray</button>
+  </div>
+  <p class="note">Pick a tool, then click inside the garden. Keys 1 to 4 also switch tools. The key in the top right of the sketch explains the symbols.</p>
+</section>
+
+<h2>Intent</h2>
+<p>I wanted to model a self-sustaining system where user interference is only needed by the perfectionists. That thinking led me to the manicured-nature of gardeners but the self-sustainment of a yard: plants need water and sun, flowers need pollinators, pollinators need flowers, and aphids need plants. I also looked at a coral reef, but it needed far more classes and connections than I could build well, so I scoped down to a garden with seven classes.</p>
+<p>My professor's pond example (Pond, Amphibian, Fly, Lotus) set the pattern I followed. Every class has properties, methods, and labeled relationships to other classes, and those relationships are what let one element change another.</p>
+<p>My goal was a garden that mostly runs itself. The user can nudge it, but the interesting part is what the elements do to each other when nobody is clicking.</p>
+
+<h2>The system</h2>
+<dl>
+  <dt>Soil</dt><dd>Holds water (<code>waterLevel</code>, capped at <code>maxWater</code>) and the seeds that land in it. Water evaporates slowly, faster in sun.</dd>
+  <dt>Seed</dt><dd>Falls, lands in the soil, and germinates once it is old enough and the soil is wet.</dd>
+  <dt>Plant</dt><dd>Drinks from the soil and grows faster in sun. At full size it becomes a flower (60%) or a weed (40%), stored as <code>isWanted</code>. Flowers make pollen and drop 3 seeds once pollinated.</dd>
+  <dt>Bee</dt><dd>Flies between flowers, eats pollen up to a food cap (<code>maxFood</code>), and carries some (<code>maxPollen</code>) to a different flower. Reproduces when well fed and starves when not.</dd>
+  <dt>Aphid</dt><dd>Crawls to the nearest plant and eats it with no cap, since aphids never stop eating. Yes aphids do fly, but not in my 800 x 600 px world they dont! Though they do reproduce when their bellies are full here.</dd>
+  <dt>Weather</dt><dd>Cycles through sun, cloud, and rain, plus a wind that drifts and sometimes gusts. It is a source, not a container, so it delivers random amounts of water without storing any.</dd>
+  <dt>Gardener</dt><dd>The user. Acts on the garden through four tools.</dd>
+</dl>
+
+<h3>How elements affect each other</h3>
+<ul>
+  <li>Weather adds water to Soil, and Soil feeds Plants and Seeds.</li>
+  <li>Sun speeds up plant growth. Clouds and rain ground the bees. Rain also pins aphids in place and washes some away.</li>
+  <li>Strong wind grounds bees and blows a few aphids off. Lighter wind carries falling seeds sideways and pushes bees off course.</li>
+  <li>Bees eat and carry pollen between flowers. Pollinated flowers drop seeds, which closes the loop back to Soil.</li>
+  <li>Aphids shrink the plants they eat, and a plant that gets too small dies.</li>
+</ul>
+
+<h3>How the user changes it</h3>
+<p>The Gardener is direct control. Click with the seed bag to drop one seed, with the watering can to pour water into the soil, with the X to remove the nearest plant (flower or weed, so removing without looking has a cost), or with the bug spray to kill aphids near the cursor.</p>
+<p>Weather is indirect control. The user cannot choose the weather, but it changes what the user needs to do. A long dry stretch means watering, and a sunny stretch means more growth, more pollen, and more aphids.</p>
+
+<h3>Emergent behavior</h3>
+<p>Nothing in the code sets how many plants, bees, or aphids there should be. Those numbers come from a few loops pushing on each other:</p>
+<ul>
+  <li>More flowers means more pollen, which means more bees, more pollination, more seeds, and more flowers.</li>
+  <li>More plants means more food for aphids. More aphids means smaller plants, fewer flowers, and fewer bees.</li>
+  <li>Plants share one pool of soil water, so the garden can only grow as large as the rain can support.</li>
+  <li>A run of cloudy or rainy days grounds the bees while they keep burning food, which can thin them out.</li>
+</ul>
+
+<h3>Symbols</h3>
+<p>The graphics are symbolic. Aphids are red dots because red reads as danger against green, even though real aphids are often green. A grounded bee turns into a gray spiral, and a flying bee is a yellow circle next to a black one. Pollen is pale yellow so it stands out on the plants. A flower's center turns gold once it has been pollinated.</p>
+
+<h2>Diagrams</h2>
+<figure>
+  <img src="images/01-final-uml-diagram.png" alt="Final UML diagram with seven classes: Weather, Bee, Plant, Aphid, Gardener, Soil, and Seed, joined by labeled relationships.">
+  <figcaption>Final UML diagram. Red sections hold properties, blue sections hold methods, and arrows are labeled with the relationship.</figcaption>
+</figure>
+<figure class="flow">
+  <svg viewBox="0 0 680 720" role="img" aria-label="Flowchart of one frame of the garden simulation"><title>Flowchart of one frame of the garden simulation</title><defs><marker id="m1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><g class="n gray"><rect x="130" y="20" width="220" height="56" rx="8"/><text class="h" x="240.0" y="38">setup()</text><text class="s" x="240.0" y="58">Create starting objects</text></g><line class="arr" x1="240" y1="76" x2="240" y2="102" marker-end="url(#m1)"/><polygon class="dec" points="240,104 340,132 240,160 140,132"/><text class="h" x="240" y="132">User input?</text><line class="arr" x1="340" y1="132" x2="398" y2="132" marker-end="url(#m1)"/><text class="s" x="369" y="120" style="text-anchor:middle">yes</text><g class="n coral"><rect x="400" y="104" width="220" height="56" rx="8"/><text class="h" x="510.0" y="122">Gardener action</text><text class="s" x="510.0" y="142">Seed, water, spray, remove</text></g><path class="arr" d="M510 160 L510 190 L240 190"/><line class="arr" x1="240" y1="160" x2="240" y2="212" marker-end="url(#m1)"/><text class="s" x="228" y="178" style="text-anchor:end">no</text><g class="n teal"><rect x="130" y="214" width="220" height="56" rx="8"/><text class="h" x="240.0" y="232">Update weather</text><text class="s" x="240.0" y="252">Sun, rain, wind</text></g><line class="arr" x1="240" y1="270" x2="240" y2="296" marker-end="url(#m1)"/><g class="n teal"><rect x="130" y="298" width="220" height="56" rx="8"/><text class="h" x="240.0" y="316">Update soil and seeds</text><text class="s" x="240.0" y="336">Evaporate, fall, germinate</text></g><line class="arr" x1="240" y1="354" x2="240" y2="380" marker-end="url(#m1)"/><g class="n teal"><rect x="130" y="382" width="220" height="56" rx="8"/><text class="h" x="240.0" y="400">Update plants</text><text class="s" x="240.0" y="420">Grow, pollen, drop seeds</text></g><line class="arr" x1="240" y1="438" x2="240" y2="464" marker-end="url(#m1)"/><g class="n teal"><rect x="130" y="466" width="220" height="56" rx="8"/><text class="h" x="240.0" y="484">Update bees and aphids</text><text class="s" x="240.0" y="504">Move, eat, reproduce</text></g><line class="arr" x1="240" y1="522" x2="240" y2="548" marker-end="url(#m1)"/><g class="n teal"><rect x="130" y="550" width="220" height="56" rx="8"/><text class="h" x="240.0" y="568">Clean up</text><text class="s" x="240.0" y="588">Remove dead, add newborns</text></g><line class="arr" x1="240" y1="606" x2="240" y2="632" marker-end="url(#m1)"/><g class="n gray"><rect x="130" y="634" width="220" height="56" rx="8"/><text class="h" x="240.0" y="652">Draw everything</text><text class="s" x="240.0" y="672">Then repeat from the top</text></g><path class="arr" d="M130 662 L70 662 L70 132 L138 132" marker-end="url(#m1)"/><g class="n coral"><rect x="420" y="300" width="16" height="16" rx="3"/></g><text class="s" x="446" y="308" style="text-anchor:start">Direct user control</text><g class="n teal"><rect x="420" y="328" width="16" height="16" rx="3"/></g><text class="s" x="446" y="336" style="text-anchor:start">Automatic simulation</text><g class="n gray"><rect x="420" y="356" width="16" height="16" rx="3"/></g><text class="s" x="446" y="364" style="text-anchor:start">Setup and drawing</text></svg>
+  <figcaption>Flowchart of one frame of the simulation, which repeats forever. The coral branch is the direct user control. The teal steps run automatically.</figcaption>
+</figure>
+<figure class="flow">
+  <svg viewBox="0 0 680 610" role="img" aria-label="Flowchart of one bee update"><title>Flowchart of one bee update</title><defs><marker id="m2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><g class="n gray"><rect x="100" y="20" width="200" height="40" rx="8"/><text class="h" x="200.0" y="40.0">For each bee</text></g><line class="arr" x1="200" y1="60" x2="200" y2="90" marker-end="url(#m2)"/><polygon class="dec" points="200,92 280,120 200,148 120,120"/><text class="h" x="200" y="120">Grounded?</text><line class="arr" x1="280" y1="120" x2="378" y2="120" marker-end="url(#m2)"/><text class="s" x="329" y="108" style="text-anchor:middle">yes</text><g class="n gray"><rect x="380" y="98" width="200" height="44" rx="8"/><text class="h" x="480.0" y="120.0">Skip this frame</text></g><path class="arr" d="M580 120 L640 120 L640 566 L302 566" marker-end="url(#m2)"/><line class="arr" x1="200" y1="148" x2="200" y2="178" marker-end="url(#m2)"/><text class="s" x="188" y="166" style="text-anchor:end">no</text><g class="n teal"><rect x="100" y="180" width="200" height="44" rx="8"/><text class="h" x="200.0" y="202.0">mobileFly() to flower</text></g><line class="arr" x1="200" y1="224" x2="200" y2="254" marker-end="url(#m2)"/><polygon class="dec" points="200,256 280,284 200,312 120,284"/><text class="h" x="200" y="284">Hungry?</text><line class="arr" x1="280" y1="284" x2="378" y2="284" marker-end="url(#m2)"/><text class="s" x="329" y="272" style="text-anchor:middle">yes</text><g class="n teal"><rect x="380" y="256" width="200" height="56" rx="8"/><text class="h" x="480.0" y="274">Eat pollen</text><text class="s" x="480.0" y="294">Capped at maxFood</text></g><path class="arr" d="M480 312 L480 330 L200 330"/><line class="arr" x1="200" y1="312" x2="200" y2="350" marker-end="url(#m2)"/><text class="s" x="188" y="324" style="text-anchor:end">no</text><polygon class="dec" points="200,352 280,380 200,408 120,380"/><text class="h" x="200" y="380">On flower?</text><line class="arr" x1="280" y1="380" x2="378" y2="380" marker-end="url(#m2)"/><text class="s" x="329" y="368" style="text-anchor:middle">yes</text><g class="n teal"><rect x="380" y="352" width="200" height="56" rx="8"/><text class="h" x="480.0" y="370">Transfer pollen</text><text class="s" x="480.0" y="390">Carry up to maxPollen</text></g><path class="arr" d="M480 408 L480 426 L200 426"/><line class="arr" x1="200" y1="408" x2="200" y2="446" marker-end="url(#m2)"/><text class="s" x="188" y="420" style="text-anchor:end">no</text><polygon class="dec" points="200,448 280,476 200,504 120,476"/><text class="h" x="200" y="476">Well fed?</text><line class="arr" x1="280" y1="476" x2="378" y2="476" marker-end="url(#m2)"/><text class="s" x="329" y="464" style="text-anchor:middle">yes</text><g class="n teal"><rect x="380" y="454" width="200" height="44" rx="8"/><text class="h" x="480.0" y="476.0">reproduce()</text></g><path class="arr" d="M480 498 L480 522 L200 522"/><line class="arr" x1="200" y1="504" x2="200" y2="544" marker-end="url(#m2)"/><text class="s" x="188" y="516" style="text-anchor:end">no</text><g class="n gray"><rect x="100" y="546" width="200" height="40" rx="8"/><text class="h" x="200.0" y="566.0">Next bee</text></g></svg>
+  <figcaption>Detail of the "Update bees and aphids" step, showing the bee's decisions. Aphids follow the same pattern with a simpler path: crawl, eat, reproduce.</figcaption>
+</figure>
+
+<h2>Process</h2>
+
+<h3>Brainstorm</h3>
+<p>I started in a notebook by listing each element with the things it does. That turned up the idea I kept through the whole project: bee and plant populations should rise and fall depending on each other.</p>
+<figure class="narrow">
+  <img src="images/02-notebook-class-list.jpg" alt="Handwritten notebook page listing Seeds, Plant, Bee/pollinators, Weather, Gardener, and Soil with their methods.">
+  <figcaption>Notebook sketch of the classes and methods.</figcaption>
+</figure>
+
+<h3>Whiteboard</h3>
+<p>Next I moved to a whiteboard and separated properties, methods, and two kinds of relationships: object to object, and user to object. This is where the Gardener, Aphid, and Soil became their own classes.</p>
+<figure>
+  <img src="images/03-whiteboard-class-diagram.jpg" alt="Color-coded whiteboard diagram of the garden classes with properties, methods, and relationship arrows.">
+  <figcaption>Whiteboard version with properties, methods, and relationships.</figcaption>
+</figure>
+
+<h3>First digital UML</h3>
+<p>I rebuilt the diagram in Miro using the same layout as my professor's example.</p>
+<figure>
+  <img src="images/04-first-miro-uml-draft.png" alt="First Miro UML draft of the garden classes.">
+  <figcaption>First Miro draft.</figcaption>
+</figure>
+<p>After reviewing it, I made these changes to reach the final version above:</p>
+<ul>
+  <li>Moved true/false states (<code>isAlive</code>, <code>isHungry</code>) to properties and kept parentheses for methods only.</li>
+  <li>Fixed the movement methods so bees fly and aphids crawl, and gave the pollen methods clearer names.</li>
+  <li>Added the Plant to Soil "drop seeds" arrow so a seed can become a plant and a plant can make new seeds.</li>
+  <li>Added <code>reproduce()</code> to Bee and Aphid so populations can grow, not only shrink.</li>
+  <li>Added numeric properties so the simulation can run: <code>waterLevel</code> and <code>maxWater</code> on Soil, and food and pollen limits on Bee. Aphids get no limit on purpose.</li>
+</ul>
+
+<h3>Visual design</h3>
+<p>Before coding, I sketched how each object would look so the shapes would be distinct from each other. This sketch also showed that weeds are just plants with <code>isWanted</code> set to false, so they did not need their own class.</p>
+<figure>
+  <img src="images/05-visual-style-sketch.jpg" alt="Whiteboard sketch of the visual style for bee, seed, aphid, plant, flower, weed, pollen, water, sun tint, and soil.">
+  <figcaption>Visual sketch of each object, plus the sun tint and soil.</figcaption>
+</figure>
+
+<h3>Building and tuning the sketch</h3>
+<p>I built the sketch in p5.js one layer at a time: soil, seeds, and plants first, then weather and the gardener tools, then bees, pollen, and aphids. Playing with it changed a few decisions:</p>
+<ul>
+  <li>Seeds now drop and fall instead of appearing in the soil, and the gardener drops one at a time. Flowers drop three.</li>
+  <li>The tools became cursors: an orange bag, a green watering can with a spout, a red X, and a red spray can.</li>
+  <li>My UML had <code>changeWind()</code> but the first version of the code had no wind, so I added it.</li>
+  <li>The garden needed to run without help, so I made sunny weather more common, made the soil hold more water for longer, and made flowers produce pollen faster.</li>
+  <li>Bug spray was added because the UML already had <code>removeBug()</code> and the aphids needed a counter the user could apply.</li>
+</ul>
+
+<footer>Built with <a href="https://p5js.org/">p5.js</a>. Diagrams made in Miro, flowcharts as SVG.</footer>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+<script src="garden.js"></script>
+<script>
+(function () {
+  var btns = document.querySelectorAll('.tools button');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { mode = Number(b.dataset.m); });
+  });
+  setInterval(function () {
+    btns.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.dataset.m) === mode));
+    });
+  }, 150);
+})();
+</script>
+</body>
+</html>
